@@ -1,5 +1,5 @@
 // var registerBtn=document.getElementById('register');
-
+const googleAPIKey="AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE"
 
 $( function() {
   $('#datepicker').datepicker();
