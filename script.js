@@ -1,4 +1,10 @@
 // var registerBtn=document.getElementById('register');
+
+
+$( function() {
+  $('#datepicker').datepicker();
+} );
+
 var Users=[]
 $("#register").on("click", registerUser)
 function registerUser(event){

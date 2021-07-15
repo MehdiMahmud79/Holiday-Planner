@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- <link rel="stylesheet" href="/resources/demos/style.css" -->
 </head>
 <body>
     <nav class="flex items-center justify-between flex-wrap bg-gray-800 p-6">
@@ -51,24 +53,36 @@
 
       </nav>
       <div class="max-w-lg mx-auto flex p-6 bg-gray-600 rounded-lg shadow-xl my-2">
-        <div class="ml-6 pt-1 ">
+        <div class="ml-6 pt-1">
         <form  action="submit">
             <label for="input"> City Name</label>
             <input id="cityName" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="input the xity name here">
             
             <label for="input"> date</label>
-              <button id="addPlan" class="bg-blue-500 hover:bg-blue-400 text-white font-bold w-full py-1 px-4 my-2 rounded">Add The Plan</button>
+            <input id="datepicker" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="input the xity name here">
+            <label for="input"> date</label>
+            <textarea name="text" id="dayPlan" class="mx-auto w-full"></textarea>
+            <button id="addPlan" class="bg-blue-500 hover:bg-blue-400 text-white font-bold w-full py-1 px-4 my-2 rounded">Add The Plan</button>
 
         </form>
-      <!-- <h4 class="text-xl text-gray-900">Traversy Media</h4>
-      <p class="text-base text-gray-600">You have a new message!</p> -->
-    </div>
-</div>
+     
+        </div>
+      </div>
 
-            <!-- <input id="datepicker" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="input the xity name here"> -->
+      <!--  container for the picked cities -->
 
-            Date: 
-            <p>Date: <input type="text" id="datepicker"></p>
+      <div class="savedPlans container">
+        <div class="plans">
+
+
+        </div>
+        <div class="map">
+
+        </div>
+
+      </div>
+
+
             <!-- scripts -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
