@@ -1,9 +1,16 @@
 // var registerBtn=document.getElementById('register');
-
+var planSubmit = $("#planSubmit");
+var plansSaved = $(".plansSaved");
+var cityName = $("#cityName");
+var dayPlan = $("#dayPlan");
 
 $( function() {
   $('#datepicker').datepicker();
 } );
+
+
+
+
 
 var Users=[]
 $("#register").on("click", registerUser)
@@ -64,3 +71,42 @@ return b;
     b=b.join(""); 
 return b;
   }
+
+planSubmit.on("submit",  function(event){
+  event.preventDefault();
+
+  var planDiv = $('<div>');
+  planDiv.addClass($('#datepicker').val());
+
+  var city = $('<div>');
+  city.addClass('city');
+  // var nameCity = cityName.val();
+  // console.log(nameCity);
+  city.text(cityName.val());
+  planDiv.append(city);
+
+  var cityLabel = $("<div>");
+  cityLabel.addClass("cityLabel")
+
+
+  var date = $('<div>');
+  date.addClass("date");
+  date.text($('#datepicker').val());
+  planDiv.append(date);
+
+  var plan = $("<div>");
+  plan.addClass("plan");
+  plan.text(dayPlan.val());
+  planDiv.append(plan);
+
+  plansSaved
+  plansSaved.append(planDiv);
+
+  
+  cityName.text("");
+  dayPlan.text("");
+  $('#datepicker').text("");
+
+
+
+});
