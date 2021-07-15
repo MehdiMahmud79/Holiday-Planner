@@ -7,6 +7,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="tailwind.css">
     <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
     <nav class="flex items-center justify-between flex-wrap bg-gray-800 p-6">
@@ -48,21 +50,33 @@
         </div>
 
       </nav>
+      <div class="max-w-lg mx-auto flex p-6 bg-gray-600 rounded-lg shadow-xl my-2">
+        <div class="ml-6 pt-1 ">
+        <form  action="submit">
+            <label for="input"> City Name</label>
+            <input id="cityName" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="input the xity name here">
+            
+            <label for="input"> date</label>
+              <button id="addPlan" class="bg-blue-500 hover:bg-blue-400 text-white font-bold w-full py-1 px-4 my-2 rounded">Add The Plan</button>
 
-        <div class="container">
-          <form action="submit">
-              <label for="name">Input the City Name Here</label>
-          </form>
+        </form>
+      <!-- <h4 class="text-xl text-gray-900">Traversy Media</h4>
+      <p class="text-base text-gray-600">You have a new message!</p> -->
+    </div>
+</div>
 
+            <!-- <input id="datepicker" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="input the xity name here"> -->
 
-        </div>
-
-
-
-<!-- scripts -->
+            Date: 
+            <p>Date: <input type="text" id="datepicker"></p>
+            <!-- scripts -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
-      
+      <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+
+
+
+
       <!-- <script src="./assets/Js/DOM.js"></script> -->
       <script src="script.js"></script>
 </body>
