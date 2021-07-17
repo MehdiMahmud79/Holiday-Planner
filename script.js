@@ -112,10 +112,41 @@ var planSubmit = $("#planSubmit");
 var plansSaved = $(".plansSaved");
 var cityName = $("#cityName");
 var dayPlan = $("#dayPlan");
+var userEmail;
+
+var userPassword;
+const googleAPIKey="AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE"
 
 const googleAPIKey="AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE";
 
 var WeatherAPIKey = "3e317835aa99c5522639a26e16f09c51";
+
+var LOCAL_STORAGE_KEY = "savedUsers";
+ 
+var users=getPreviousUsers();
+  
+function getPreviousUsers() {
+   savedPlans = localStorage.getItem(LOCAL_STORAGE_KEY);
+console.log("local Data", savedPlans)
+  if (savedPlans) {
+ $("#register").text("Login")
+     $("#LoginForm").removeClass("hidden"); 
+  
+//  we have to hide everything here
+    return JSON.parse(savedPlans);
+
+  } else {
+    $("#LoginForm h1").text("SignUp")
+    $("#register").text("SignUp")
+    $("#LoginForm").removeClass("hidden"); 
+//  we have to hide everything here
+return [];
+  }
+}
+
+
+
+
 
 $( function() {
   $('#datepicker').datepicker();
@@ -128,38 +159,82 @@ $( function() {
 
 var plans = []
 
+$("#loginBtn").on("click", loadLogin)
 
 $("#register").on("click", registerUser)
-function registerUser(event){
+$("#addPlan").on("click", addPlan)
+
+
+function loadLogin(event){
     event.preventDefault(); 
- var user={}
- var userEmail=$("#userEmail").trim().val();
-var userPassword=$("#userpassword").val().trim();
-user.userEmail=encrypte(userEmail)
-user.userPassword=encrypte(userPassword)
-user.userPlans.push(plans.text())
-console.log(JSON.stringify(users))
+$("#LoginForm").removeClass("hidden"); 
 
-    // console.log(encrypte(userEmail),userpassword.length );
-// Users.push({userEmail,userPassword})
-// Users.push({userEmail,userPassword})
-// Users.push({userEmail,userPassword})
-localStorage.setItem("users",Users)
-console.log(localStorage.getItem("users")[0])
-
-//       if(i%2==0){
-//     document.body.classList.add('bg-red-700');
-//     document.body.classList.remove('bg-blue-700');
-
-//     i++
-//    }else{
-//       console.log("even", i);
-
-//    i++
-//     document.body.classList.remove('bg-red-700');
-//     document.body.classList.add('bg-blue-700');
-//   }
 }
+
+// Register  a new user or login an existing user
+function registerUser(event){
+  event.preventDefault(); 
+var user={};
+console.log("register user")
+
+ userEmail=$("#userEmail").val().trim();
+
+ userPassword=$("#userPassword").val().trim();
+$("#register").text("SignUp")
+for(var i in users){
+  console.log("i", i)
+if (userEmail===users[i].userEmail){
+$("#register").text("Login")
+}
+
+}
+// user.userEmail=encrypte(userEmail)
+// user.userPassword=encrypte(userPassword)
+user.userEmail=userEmail;
+user.userPassword=userPassword;
+
+
+$("#LoginForm").addClass("hidden"); 
+$("#userName").text(`${userEmail} plans: `)
+}
+
+// save plans to the local storage
+function setPreviousUsers() {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(users));
+
+}
+
+// Add a plan to the page
+function addPlan(event){
+  event.preventDefault(); 
+  console.log("adding a plan and save it locally")
+var user={};
+user.userPlans=[];
+
+user.userEmail=userEmail;
+user.userPassword=userPassword;
+
+//  get weathe rinformation
+// call weather(cityName)
+
+plan= new object()
+plan.cityName=cityName;
+plan.cityLon=cityLon;
+plan.cityLan=cityLan;
+plan.cityTemp=cityTemp;
+plan.cityWeather=cityWeather;
+
+plans.push(plan)
+
+user.userPlans.push(plans)
+
+users.push(user);
+setPreviousUsers()
+
+
+}
+
+
 
 function encrypte (a) {
     var a = a.split("");
