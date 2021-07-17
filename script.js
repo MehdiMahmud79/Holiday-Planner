@@ -17,16 +17,105 @@
 //   …
 //   ]
 //        }
-  
-var users={};
+
+
+function getWeather(nameOfCity, planDiv){
+  var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${nameOfCity}&units=metric&appid=${WeatherAPIKey}`
+
+  fetch(requestUrl)
+  .then(function (response) {
+    return response.json(); //converts response to object
+  })
+  .then(function (data){
+    console.log(data);
+
+    var cityLon = data.coord.lon;
+    var cityLat = data.coord.lat;
+
+    var weatherNow = document.createElement("div"); //creates a new card
+    
+    //creates multuple line break objects for spacing
+    var [lb2, lb3, lb5] = [document.createElement("br"), document.createElement("br"), document.createElement("br"), document.createElement("br")];
+
+
+    //creates an img element and updates the src as the weather icon URL, before appending to card
+    var weatherNowIconCont = document.createElement("img");
+    weatherNowIconCont.setAttribute("class", "Icon ");
+    var Icon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+    weatherNowIconCont.setAttribute("src", Icon);
+    weatherNow.appendChild(weatherNowIconCont);
+
+    weatherNow.appendChild(lb2);
+
+    //creates div to hold forecast tenperature, updates then appends to card
+    var weatherNowTemp = document.createElement("div");
+    weatherNowTemp.setAttribute("class", "Temp ");
+    weatherNowTemp.textContent = `Temperature: ${data.main.temp}°C`;
+    weatherNow.appendChild(weatherNowTemp);
+
+    weatherNow.appendChild(lb3);
+    
+    //crates element to hold humidity, updates content then appends to card
+    var weatherNowDesc = document.createElement("div");
+    weatherNowDesc.setAttribute("class", " WeatherDesc ");
+    weatherNowDesc.textContent = `${data.weather[0].description}`;
+    weatherNow.appendChild(weatherNowDesc);
+
+    weatherNow.appendChild(lb5);
+
+
+
+    
+
+    
+    weatherNow.setAttribute("class", "flex-col bg-blue-600 border rounded cityDiv");
+    planDiv.append(weatherNow);
+
+
+
+
+
+
+
+
 
   
+    return weatherNow;
+
+  });
+
+
+}
+
+
+
+  
+var users = [{ 
+  user: 'KevinRyner',
+  userPassword: '1234',
+  userPlans: [
+      {
+       cityName: null,
+       cityLon: null,
+       cityLat: null, 
+        planDate: null,
+        planDesc: null,
+        temp: null,
+        icon: null,
+        weatherDesc: null,
+      }
+    ]
+}];
+
 
 var planSubmit = $("#planSubmit");
 var plansSaved = $(".plansSaved");
 var cityName = $("#cityName");
 var dayPlan = $("#dayPlan");
-const googleAPIKey="AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE"
+
+const googleAPIKey="AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE";
+
+var WeatherAPIKey = "3e317835aa99c5522639a26e16f09c51";
 
 $( function() {
   $('#datepicker').datepicker();
@@ -102,8 +191,15 @@ return b;
 return b;
   }
 
+
+
+
+
 planSubmit.on("submit",  function(event){
   event.preventDefault();
+
+  
+
 
   if ($('#datepicker').val() == ""){
       var modalBox = $("<div></div>");
@@ -145,8 +241,13 @@ planSubmit.on("submit",  function(event){
 
   }
 
+  var nameOfCity = cityName.val();
+
   var planDiv = $('<div>');
-  planDiv.addClass($('#datepicker').val() + "bg-blue-800 m-6 text-center rounded border"); 
+  planDiv.addClass($('#datepicker').val() + "bg-blue-800 m-6 text-center rounded border");
+
+
+  getWeather(nameOfCity, planDiv);
 
   var dateLabel = $("<div>");
   dateLabel.addClass("dateLabel bg-blue-600 text-xl m-2 text-center rounded border");
@@ -168,7 +269,7 @@ planSubmit.on("submit",  function(event){
   city.addClass('city bg-blue-200 rounded m-3 text-center border');
   // var nameCity = cityName.val();
   // console.log(nameCity);
-  city.text(cityName.val());
+  city.text(nameOfCity);
   planDiv.append(city);
 
   
@@ -183,10 +284,20 @@ planSubmit.on("submit",  function(event){
   plan.text(dayPlan.val());
   planDiv.append(plan);
 
-
-  plansSaved
+  
   plansSaved.append(planDiv);
 
+
+  users[0].userPlans.push({
+    cityName: nameOfCity,
+    cityLon: null,
+    cityLat: null, 
+    planDate: null,
+    planDesc: null,
+    temp: null,
+    icon: null,
+    weatherDesc: null,
+  })
   
   cityName.text("");
   dayPlan.text("");
