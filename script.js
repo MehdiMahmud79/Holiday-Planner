@@ -1,4 +1,26 @@
 // var registerBtn=document.getElementById('register');
+// users{
+//   user:{
+  // userEmail:
+//    userPassword: 1234 , 
+//   userPlans: [
+//   {
+//   cityName:  london   ,
+//   cityLon: 1234 ,
+//   cityLan:  34232 ,
+//   planeDate; 3/5/2021  ,
+//   planDescription:  ewrwrwqr   ,
+//   Temp:    ,
+//   Icon:    ,
+//   weatherDescription:
+//   },
+//   …
+//   ]
+//        }
+  
+var users={};
+
+  
 
 var planSubmit = $("#planSubmit");
 var plansSaved = $(".plansSaved");
@@ -15,21 +37,24 @@ $( function() {
 } );
 
 
-var planArray = []
+var plans = []
 
-var Users=[]
+
 $("#register").on("click", registerUser)
 function registerUser(event){
     event.preventDefault(); 
-    var Users=[]
-var userEmail=$("#userEmail").val().trim();
+ var user={}
+ var userEmail=$("#userEmail").trim().val();
 var userPassword=$("#userpassword").val().trim();
-userEmail=encrypte(userEmail)
-encrypte(userPassword)
+user.userEmail=encrypte(userEmail)
+user.userPassword=encrypte(userPassword)
+user.userPlans.push(plans.text())
+console.log(JSON.stringify(users))
+
     // console.log(encrypte(userEmail),userpassword.length );
-Users.push({userEmail,userPassword})
-Users.push({userEmail,userPassword})
-Users.push({userEmail,userPassword})
+// Users.push({userEmail,userPassword})
+// Users.push({userEmail,userPassword})
+// Users.push({userEmail,userPassword})
 localStorage.setItem("users",Users)
 console.log(localStorage.getItem("users")[0])
 
