@@ -40,7 +40,7 @@ function getWeather(nameOfCity, planDiv){
 
     //creates an img element and updates the src as the weather icon URL, before appending to card
     var weatherNowIconCont = document.createElement("img");
-    weatherNowIconCont.setAttribute("class", "Icon ");
+    weatherNowIconCont.setAttribute("class", "Icon city bg-blue-200 rounded m-3 text-center border");
     var Icon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
     weatherNowIconCont.setAttribute("src", Icon);
     weatherNow.appendChild(weatherNowIconCont);
@@ -49,7 +49,7 @@ function getWeather(nameOfCity, planDiv){
 
     //creates div to hold forecast tenperature, updates then appends to card
     var weatherNowTemp = document.createElement("div");
-    weatherNowTemp.setAttribute("class", "Temp ");
+    weatherNowTemp.setAttribute("class", "Temp city bg-blue-200 rounded m-3 text-center border ");
     weatherNowTemp.textContent = `Temperature: ${data.main.temp}°C`;
     weatherNow.appendChild(weatherNowTemp);
 
@@ -57,30 +57,16 @@ function getWeather(nameOfCity, planDiv){
     
     //crates element to hold humidity, updates content then appends to card
     var weatherNowDesc = document.createElement("div");
-    weatherNowDesc.setAttribute("class", " WeatherDesc ");
+    weatherNowDesc.setAttribute("class", " WeatherDesc city bg-blue-200 rounded m-3 text-center border");
     weatherNowDesc.textContent = `${data.weather[0].description}`;
     weatherNow.appendChild(weatherNowDesc);
 
     weatherNow.appendChild(lb5);
 
-
-
-    
-
-    
-    weatherNow.setAttribute("class", "flex-col bg-blue-600 border rounded cityDiv");
+    weatherNow.setAttribute("class", "flex-col items-center bg-blue-300 border rounded cityDiv");
     planDiv.append(weatherNow);
-
-
-
-
-
-
-
-
-
   
-    return weatherNow;
+    return {weatherNow, ;
 
   });
 
@@ -242,9 +228,12 @@ planSubmit.on("submit",  function(event){
   }
 
   var nameOfCity = cityName.val();
+  var dateOfPlan = $('#datepicker').val();
+  var planOnDay = dayPlan.val();
+
 
   var planDiv = $('<div>');
-  planDiv.addClass($('#datepicker').val() + "bg-blue-800 m-6 text-center rounded border");
+  planDiv.addClass(dateOfPlan+ "bg-blue-800 m-6 text-center rounded border");
 
 
   getWeather(nameOfCity, planDiv);
@@ -256,7 +245,7 @@ planSubmit.on("submit",  function(event){
 
   var date = $('<div>');
   date.addClass("date bg-blue-200 rounded text-center m-3 border");
-  date.text($('#datepicker').val());
+  date.text(dateOfPlan);
   planDiv.append(date);
 
   var cityLabel = $("<div>");
@@ -280,8 +269,8 @@ planSubmit.on("submit",  function(event){
   planDiv.append(planLabel);
 
   var plan = $("<div>");
-  plan.addClass("plan bg-blue-200 rounded text-center m-3 border");
-  plan.text(dayPlan.val());
+  plan.addClass("plan bg-blue-200 rounded flex text-center m-3 border");
+  plan.text(planOnDay);
   planDiv.append(plan);
 
   
@@ -292,13 +281,18 @@ planSubmit.on("submit",  function(event){
     cityName: nameOfCity,
     cityLon: null,
     cityLat: null, 
-    planDate: null,
-    planDesc: null,
+    planDate: dateOfPlan,
+    planDesc: planOnDay,
     temp: null,
     icon: null,
     weatherDesc: null,
   })
   
+  JSON.stringify( users[0].userPlans);
+  localStorage.setItem("user[0]Plans", users[0].userPlans);
+
+
+
   cityName.text("");
   dayPlan.text("");
   $('#datepicker').text("");
