@@ -29,25 +29,26 @@ function initMap(){
     google.maps.event.addListener(map, 'click', function(event){
       // Add marker
       addMarker({coords:event.latLng});
-      console.log({coords:event.latLng.lat})
     });
 
-    /*
+   
     // Add marker
     var marker = new google.maps.Marker({
-      position:{lat:42.4668,lng:-70.9495},
+      position:{lat:52.489471,lng:-1.898575}, // get this from the city name lan lon
       map:map,
       icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
     });
 
+
+    // add info to th emarker
     var infoWindow = new google.maps.InfoWindow({
-      content:'<h1>Lynn MA</h1>'
+      content:'<h1>get the text from the city description or wekipedia</h1>'
     });
 
-    marker.addListener('click', function(){
+    marker.addListener('mouseover', function(){
       infoWindow.open(map, marker);
     });
-    */
+    
 
     // Array of markers
     var markers = [
