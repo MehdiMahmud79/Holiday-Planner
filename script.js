@@ -1,8 +1,10 @@
 // var registerBtn=document.getElementById('register');
+
 var planSubmit = $("#planSubmit");
 var plansSaved = $(".plansSaved");
 var cityName = $("#cityName");
 var dayPlan = $("#dayPlan");
+const googleAPIKey="AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE"
 
 $( function() {
   $('#datepicker').datepicker();
@@ -14,8 +16,6 @@ $( function() {
 
 
 var planArray = []
-
-
 
 var Users=[]
 $("#register").on("click", registerUser)
