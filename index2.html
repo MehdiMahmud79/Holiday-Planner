@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- <link rel="stylesheet" href="/resources/demos/style.css" -->
 </head>
 <body>
     <nav class="flex items-center justify-between flex-wrap bg-gray-800 p-6">
         <div class="flex items-center flex-shrink-0 text-white mr-6">
-          <span class="font-bold text-3xl">HolidayPlanner</span>
+          <span class="font-bold text-3xl">Holiday Planner</span>
         </div>
   
         <div class="w-full block flex-grow sm:flex sm:items-center sm:w-auto">
@@ -52,18 +52,16 @@
         </div>
 
       </nav>
-      <div class="max-w-lg mx-auto flex p-6 bg-gray-600 rounded-lg shadow-xl my-2">
+      <div class="max-w-lg mx-auto flex p-6 bg-gray-600 rounded-lg shadow-xl my-2 planInput">
         <div class="ml-6 pt-1">
-        <form  action="submit">
-            <label for="input"> City Name</label>
-            <input id="cityName" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="input the xity name here">
-            
-            <label for="input"> date</label>
-            <input id="datepicker" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="input the xity name here">
-            <label for="input"> date</label>
+        <form id="planSubmit">
+            <label for="input"> City Name </label>
+            <input id="cityName" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="input the city name here">
+            <label for="input"> Date </label>
+            <input id="datepicker" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="Input date here">
+            <label for="input"> Plans </label>
             <textarea name="text" id="dayPlan" class="mx-auto w-full"></textarea>
             <button id="addPlan" class="bg-blue-500 hover:bg-blue-400 text-white font-bold w-full py-1 px-4 my-2 rounded">Add The Plan</button>
-
         </form>
      
         </div>
@@ -72,7 +70,9 @@
       <!--  container for the picked cities -->
 
       <div class="savedPlans container">
-        <div class="plans">
+        <div class="plansSaved w-1/2 pt-1 left flex p-3 bg-gray-600 rounded-lg shadow-xl ">
+          <div class="w-1/2 text-2xl h-10 text-center px-auto bg-indigo-400 mx-auto border rounded"> Plans Saved:  </div>
+          
 
         </div>
 
