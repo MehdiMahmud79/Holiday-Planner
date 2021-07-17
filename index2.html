@@ -93,21 +93,32 @@
 
 
 <div class="allplansContainer">
-    <div class="plan">
-        <p class="cityName"> city name here</p>
-        <p class="planDate"> Date</p>
-        <p class="planDescription"> plan description</p>
-    </div>
+  <div class="planCards">
+      <div class="plan">
+          <p class="cityName"> city name here</p>
+          <p class="planDate"> Date</p>
+          <p class="planDescription"> plan description</p>
+      </div>
 
-    <div class="weathercrad">
-      <im class="weatherIcon" src="">
-      <p class="cityTemp"> Temp</p>
-      <p class="cityWatehrInfo"> Weather info</p>
-    </div>
+      <div class="city-weather hide">
+        <div class="todaysWeather ">
+            <div class="todayHeading">
+                <div>
+                    <h2 class="todayTime"><i class="fa fa-map-marker local" aria-hidden="true"></i><span></span></h2>
+                    <h3 class="description"></h3>
+                    <img class="weatherIcon"  src="icons/unknown.png" alt="">
+                    <p class="Temprature">Temprature: <span>--</span> </p>
+                    <p class="Humidity">Humidity: <span>--</span> </p>
+                    <p class="WindSpeed">WindSpeed: <span>--</span> </p>
 
+                </div>
+            </div>
 
+        </div>
+        </div> //end of weather card
+  </div>//end of plancards
 
-</div>
+</div>//end of all plansContainer
 
 
 
@@ -116,12 +127,12 @@
 
       <!--  container for the picked cities -->
 
-      <div class="savedPlans container">
+      <!-- <div class="savedPlans container">
         <div class="plansSaved w-1/2 pt-1 left flex-col p-3 bg-gray-600 rounded-lg shadow-xl ">
           <div class="w-1/2 text-2xl h-10 text-center px-auto bg-indigo-400 mx-auto border rounded"> Plans Saved:  </div>
           
 
-        </div>
+        </div> -->
 
         <!-- adding google map here -->
         <div id="GoogleMap" class="h-screen p-6 right w-1/4">
