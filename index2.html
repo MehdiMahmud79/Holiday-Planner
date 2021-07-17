@@ -79,11 +79,11 @@
         <div class="ml-6 pt-1">
         <form id="planSubmit">
             <label for="input"> City Name </label>
-            <input id="cityName" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="input the city name here">
+            <input id="cityName" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="input the city name here" value="London">
             <label for="input"> Date </label>
-            <input id="datepicker" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="Input date here">
+            <input id="datepicker" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="Input date here" value="07/01/2021">
             <label for="input"> Plans </label>
-            <textarea name="text" id="dayPlan" class="mx-auto w-full"></textarea>
+            <textarea name="text" id="dayPlan" class="mx-auto w-full" >plan discription</textarea>
             <button id="addPlan" class="bg-blue-500 hover:bg-blue-400 text-white font-bold w-full py-1 px-4 my-2 rounded">Add The Plan</button>
         </form>
      
@@ -91,55 +91,45 @@
       </div>
 
 
+      <div class=" flex bg-gray-300 min-h-0 rounded-md m-1 p-1 justify-around ">
+            <div >
+              <div class="city-weather hide">
+                  <div class="flex todayHeading">
+                      <div>
+          <h2 class="todayDate"><i class="fa fa-calendar" aria-hidden="true"></i><span> Date</span></h2>
 
-<div class="allplansContainer">
-  <div class="planCards">
-      <div class="plan">
-          <p class="cityName"> city name here</p>
-          <p class="planDate"> Date</p>
-          <p class="planDescription"> plan description</p>
-      </div>
+                        <div class="flex">
+                          <h2 class="todayTime"><i class="fa fa-map-marker local" aria-hidden="true"></i><span>cityName</span></h2>
+                          <p class="Temprature"><span>--</span> </p>
+                        </div>
+                          <div class="flex">
+                          <img class="weatherIcon"  src="icons/unknown.png" alt="weather image desc.">
+                          <h3 class="description"></h3>
+                          </div>
+                      </div>   
+ 
+                      <div>
+                    
+                      </div>
 
-      <div class="city-weather hide">
-        <div class="todaysWeather ">
-            <div class="todayHeading">
-                <div>
-                    <h2 class="todayTime"><i class="fa fa-map-marker local" aria-hidden="true"></i><span></span></h2>
-                    <h3 class="description"></h3>
-                    <img class="weatherIcon"  src="icons/unknown.png" alt="">
-                    <p class="Temprature">Temprature: <span>--</span> </p>
-                    <p class="Humidity">Humidity: <span>--</span> </p>
-                    <p class="WindSpeed">WindSpeed: <span>--</span> </p>
+                  </div>
+      
+              </div>
+            </div>  
 
-                </div>
-            </div>
+
+           
 
         </div>
-        </div> //end of weather card
-  </div>//end of plancards
-
-</div>//end of all plansContainer
-
-
-
-
-
-
-      <!--  container for the picked cities -->
-
-      <!-- <div class="savedPlans container">
-        <div class="plansSaved w-1/2 pt-1 left flex-col p-3 bg-gray-600 rounded-lg shadow-xl ">
-          <div class="w-1/2 text-2xl h-10 text-center px-auto bg-indigo-400 mx-auto border rounded"> Plans Saved:  </div>
-          
-
-        </div> -->
-
-        <!-- adding google map here -->
-        <div id="GoogleMap" class="h-screen p-6 right w-1/4">
+      
+       <div id="GoogleMap" class="h-screen p-6 right w-1/4">
           <h1>My google Map</h1>
         </div>
 
-      </div>
+        <!-- adding google map here -->
+ 
+
+   
 
 
             <!-- scripts -->

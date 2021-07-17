@@ -232,14 +232,13 @@ function getWeather(cityName) {
           weather.description = data.weather[0].description;
           weather.iconId = data.weather[0].icon;
           weather.city = data.name;
-          weather.windSpeed = data.wind.speed;
+          // weather.windSpeed = data.wind.speed;
           weather.city=data.name;
-          weather.humidity = data.main.humidity
+          // weather.humidity = data.main.humidity
           weather.country = data.sys.country;
-          weather.lat= Math.floor(data.coord.lat);
-          weather.lon= Math.floor(data.coord.lon);
-          
-      
+          weather.lat=data.coord.lat 
+          weather.lon=data.coord.lon
+    
       })
       
       .then(function(){
@@ -257,56 +256,7 @@ function getWeather(cityName) {
 };
 function displayWeather(){
     $(".todayHeading .description").text(`${weather.description}`);
-    $(".todayTime span").text(`  ${weather.city}`);
+    $(".todayTime span").text(`  ${weather.city} `);
     $(".weatherIcon").attr("src", `./icons/${weather.iconId}.png`);
     $(".todayHeading .Temprature span").text(`°${weather.temperature.temp}C`);
-    $(".todayHeading  .Humidity span").text(`${weather.humidity}%`);
-    $(".todayHeading  .WindSpeed span").text(`${weather.windSpeed}`);
 }
-// function getWeather(nameOfCity){
-//   var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${nameOfCity}&units=metric&appid=${WeatherAPIKey}`
-
-//   fetch(requestUrl)
-//   .then(function (response) {
-//     return response.json(); //converts response to object
-//   })
-//   .then(function (data){
-//     console.log(data);
-
-//     plan= new object();
-
-//     plan.cityName=cityName;
-//     plan.cityTemp=data.main.temp;
-//     plan.cityWeather=data.weather[0].description;
-//     plan.cityLon = data.coord.lon;
-//     plan.cityLat =  data.coord.lat;
-//     plan.weatheIcon = `./icons/${data.weather[0].icon}.png`;
-
-//     return plan;
-
-//   });
-//   // setPlans(index)
-// }
-// function setPlans(index){
-  
-//   userPlans= getfromLocal();
-  
-//     $(".allplansContainer").empty();
-//     planDiv= $("<div>")
-//     weatherDiv= $("<div>")
-  
-  
-//       planDiv.append(`<p class="plans "> ${userPlans[index]}.["cityName"]</p>`);
-//       planDiv.append(`<p class="plans "> ${userPlans[index]}.["planDate"]</p>`);
-//       planDiv.append(`<p class="plans ">${userPlans[index]}.["planDesc"]</p>`);
-   
-//       weatherDiv.append(`<im class="plans "> ${userPlans[index]}.["icon"]`);
-//       weatherDiv.append(`<p class="plans "> ${userPlans[index]}.["temp"]</p>`);
-//       weatherDiv.append(`<p class="plans "> ${userPlans[index]}.["weatherDesc"]</p>`);
-  
-//     $(".allplansContainer").append(planDiv);
-//     $(".allplansContainer").append(weatherDiv);
-  
-  
-  
-//   };
