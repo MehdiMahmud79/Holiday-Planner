@@ -11,4 +11,11 @@
 
 .hidden{
     display:none;
+
+
+img{
+    width: 40%;
+    height: 40%;
+    align-self: center;
+
 }
