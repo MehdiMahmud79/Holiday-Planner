@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lat/Lng Object Literal</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<style>
+
+#map {
+  height: 100%;
+}
+
+/* Optional: Makes the sample page fill the window. */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+</style>
+    <script src="./index.js"></script>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+  </body>
+</html>
