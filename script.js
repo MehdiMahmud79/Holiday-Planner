@@ -19,7 +19,7 @@
 //        }
 
 
-function getWeather(nameOfCity, planDiv){
+function getWeather(nameOfCity){
   var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${nameOfCity}&units=metric&appid=${WeatherAPIKey}`
 
   fetch(requestUrl)
@@ -29,95 +29,85 @@ function getWeather(nameOfCity, planDiv){
   .then(function (data){
     console.log(data);
 
-    var cityLon = data.coord.lon;
-    var cityLat = data.coord.lat;
+    plan= new object();
 
-    var weatherNow = document.createElement("div"); //creates a new card
-    
-    //creates multuple line break objects for spacing
-    var [lb2, lb3, lb5] = [document.createElement("br"), document.createElement("br"), document.createElement("br"), document.createElement("br")];
+    plan.cityName=cityName;
+    plan.cityTemp=data.main.temp;
+    plan.cityWeather=data.weather[0].description;
+    plan.cityLon = data.coord.lon;
+    plan.cityLat =  data.coord.lat;
+    plan.weatheIcon = `./icons/${data.weather[0].icon}.png`;
 
+    return plan;
 
-    //creates an img element and updates the src as the weather icon URL, before appending to card
-    var weatherNowIconCont = document.createElement("img");
-    weatherNowIconCont.setAttribute("class", "Icon ");
-    var Icon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
-    weatherNowIconCont.setAttribute("src", Icon);
-    weatherNow.appendChild(weatherNowIconCont);
-
-    weatherNow.appendChild(lb2);
-
-    //creates div to hold forecast tenperature, updates then appends to card
-    var weatherNowTemp = document.createElement("div");
-    weatherNowTemp.setAttribute("class", "Temp ");
-    weatherNowTemp.textContent = `Temperature: ${data.main.temp}°C`;
-    weatherNow.appendChild(weatherNowTemp);
-
-    weatherNow.appendChild(lb3);
-    
-    //crates element to hold humidity, updates content then appends to card
-    var weatherNowDesc = document.createElement("div");
-    weatherNowDesc.setAttribute("class", " WeatherDesc ");
-    weatherNowDesc.textContent = `${data.weather[0].description}`;
-    weatherNow.appendChild(weatherNowDesc);
-
-    weatherNow.appendChild(lb5);
-
+  }).then{
 
 
     
-
-    
-    weatherNow.setAttribute("class", "flex-col bg-blue-600 border rounded cityDiv");
-    planDiv.append(weatherNow);
-
-
-
-
-
-
-
-
-
-  
-    return weatherNow;
-
-  });
+  };
 
 
 }
 
 
 
-  
-var users = [{ 
-  user: 'KevinRyner',
-  userPassword: '1234',
-  userPlans: [
-      {
-       cityName: null,
-       cityLon: null,
-       cityLat: null, 
-        planDate: null,
-        planDesc: null,
-        temp: null,
-        icon: null,
-        weatherDesc: null,
-      }
-    ]
-}];
+ 
+function setPlans(index){
+
+userPlans= getfromLocal();
+
+  $(".allplansContainer").empty();
+  planDiv= $("<div>")
+  weatherDiv= $("<div>")
+
+
+    planDiv.append(`<p class="plans "> ${userPlans[index]}.["cityName"]</p>`);
+    planDiv.append(`<p class="plans "> ${userPlans[index]}.["planDate"]</p>`);
+    planDiv.append(`<p class="plans ">${userPlans[index]}.["planDesc"]</p>`);
+ 
+    weatherDiv.append(`<im class="plans "> ${userPlans[index]}.["icon"]`);
+    weatherDiv.append(`<p class="plans "> ${userPlans[index]}.["temp"]</p>`);
+    weatherDiv.append(`<p class="plans "> ${userPlans[index]}.["weatherDesc"]</p>`);
+
+  $(".allplansContainer").append(planDiv);
+  $(".allplansContainer").append(weatherDiv);
+
+
+
+};
+
+
+// var users = [
+//   { 
+//   userEmail: 'KevinRyner',
+//   userPassword: '1234',
+//   userPlans: [
+//       {
+//        cityName: null,
+//        cityLon: null,
+//        cityLat: null, 
+//         planDate: null,
+//         planDesc: null,
+//         temp: null,
+//         icon: null,
+//         weatherDesc: null,
+//       }, 
+
+//     ]
+// }, 
+// ];
 
 
 var planSubmit = $("#planSubmit");
 var plansSaved = $(".plansSaved");
 var cityName = $("#cityName");
 var dayPlan = $("#dayPlan");
+var  user={};
 var userEmail;
-
+var index=0;
 var userPassword;
-const googleAPIKey="AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE"
 
-const googleAPIKey="AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE";
+const googleAPIKey="AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE"
 
 var WeatherAPIKey = "3e317835aa99c5522639a26e16f09c51";
 
@@ -129,7 +119,7 @@ function getPreviousUsers() {
    savedPlans = localStorage.getItem(LOCAL_STORAGE_KEY);
 console.log("local Data", savedPlans)
   if (savedPlans) {
- $("#register").text("Login")
+    $("#register").text("Login")
      $("#LoginForm").removeClass("hidden"); 
   
 //  we have to hide everything here
@@ -158,7 +148,6 @@ $( function() {
 
 
 var plans = []
-
 $("#loginBtn").on("click", loadLogin)
 
 $("#register").on("click", registerUser)
@@ -174,16 +163,21 @@ $("#LoginForm").removeClass("hidden");
 // Register  a new user or login an existing user
 function registerUser(event){
   event.preventDefault(); 
-var user={};
+ user={};
+user.userPlans=[];
 console.log("register user")
 
  userEmail=$("#userEmail").val().trim();
 
  userPassword=$("#userPassword").val().trim();
+
 $("#register").text("SignUp")
+
 for(var i in users){
   console.log("i", i)
 if (userEmail===users[i].userEmail){
+
+  user.userPlans=users[i].userPlans;
 $("#register").text("Login")
 }
 
@@ -208,32 +202,19 @@ function setPreviousUsers() {
 function addPlan(event){
   event.preventDefault(); 
   console.log("adding a plan and save it locally")
-var user={};
-user.userPlans=[];
+// var user={};
+ user.userPlans=[];
 
 user.userEmail=userEmail;
 user.userPassword=userPassword;
 
 //  get weathe rinformation
-// call weather(cityName)
-
-plan= new object()
-plan.cityName=cityName;
-plan.cityLon=cityLon;
-plan.cityLan=cityLan;
-plan.cityTemp=cityTemp;
-plan.cityWeather=cityWeather;
-
-plans.push(plan)
-
-user.userPlans.push(plans)
-
-users.push(user);
-setPreviousUsers()
+getWeather(cityName);
 
 
+setPlans(index)
+index++;
 }
-
 
 
 function encrypte (a) {
