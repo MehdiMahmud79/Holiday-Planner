@@ -131,9 +131,6 @@ return [];
 }
 
 
-
-
-
 $( function() {
   $('#datepicker').datepicker();
 } );
