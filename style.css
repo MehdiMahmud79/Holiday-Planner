@@ -3,19 +3,87 @@
 
 #GoogleMap{
     margin:20px auto;
-    width:50%;
+    width:80%;
     height:400px;
+border-radius: 20px;
+
+}
 
 
+.allplansContainer{
+    width: 60%;
+    height:auto;
+    margin:5px;
+    background-color:rgb(0, 250, 21);
+    border-radius:20px;
+    padding:10px;
+}
+.plan{
+    width: 40%;
+ margin:5px;
+    background-color:rgb(251, 255, 0);
+    border-radius:20px;
+    padding:10px;
+    
 }
 
 .hidden{
     display:none;
 
-
-img{
-    width: 40%;
-    height: 40%;
+}
+/* img{
+    width: 20%;
+    height: 20%;
     align-self: center;
 
-}
+} */
+
+/* .city-weather{
+    width: 50%;
+    margin:5px;
+    background-color:rgb(0, 125, 228);
+    border-radius:20px;
+    padding:1px;
+    
+} */
+
+.city-weather{
+       /* display: flex; */
+        background-color:rgb(224, 224, 224);
+        min-height:100px;
+        border-radius:20px;
+        margin:10px;
+        padding:20px;
+        justify-content:space-around;
+    }
+
+    .hide{
+        display:none;
+    }
+    
+
+   
+
+
+    
+    .todayContainer{
+        display:flex;
+        flex-direction:column;
+    
+    }
+    .todayContainer .info{
+        display:flex;
+        flex-direction:column;
+        
+        /* margin-left: 20%; */
+        font-size:1.0em;
+    }
+    
+    .todayContainer li{
+        list-style: none;
+        line-height: 2;
+        padding-bottom: 10px;
+    }
+    .todayContainer li span{
+        color:red;
+    }
