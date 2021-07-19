@@ -1,3 +1,4 @@
+
 // var registerBtn=document.getElementById('register');
 // users{
 //   user:{
@@ -94,28 +95,36 @@ var users = [{
 }];
 
 
+
 var planSubmit = $("#planSubmit");
 var plansSaved = $(".plansSaved");
-var cityName = $("#cityName");
+var cityName;
 var dayPlan = $("#dayPlan");
+var  user={};
 var userEmail;
-
+var index=0;
 var userPassword;
+
 const googleAPIKey="AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE"
 
-const googleAPIKey="AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE";
+const apiKey="65b50ac0fd144e1fbd69be8c79bf2491"
 
-var WeatherAPIKey = "3e317835aa99c5522639a26e16f09c51";
-
+var weather = {};
+weather.temperature = {
+  unit : "celsius", 
+  temp : 0
+}
 var LOCAL_STORAGE_KEY = "savedUsers";
- 
+
+
 var users=getPreviousUsers();
-  
+
+
 function getPreviousUsers() {
    savedPlans = localStorage.getItem(LOCAL_STORAGE_KEY);
 console.log("local Data", savedPlans)
   if (savedPlans) {
- $("#register").text("Login")
+    $("#register").text("Login")
      $("#LoginForm").removeClass("hidden"); 
   
 //  we have to hide everything here
@@ -144,7 +153,6 @@ $( function() {
 
 
 var plans = []
-
 $("#loginBtn").on("click", loadLogin)
 
 $("#register").on("click", registerUser)
@@ -160,16 +168,21 @@ $("#LoginForm").removeClass("hidden");
 // Register  a new user or login an existing user
 function registerUser(event){
   event.preventDefault(); 
-var user={};
+ user={};
+user.userPlans=[];
 console.log("register user")
 
  userEmail=$("#userEmail").val().trim();
 
  userPassword=$("#userPassword").val().trim();
+
 $("#register").text("SignUp")
+
 for(var i in users){
   console.log("i", i)
 if (userEmail===users[i].userEmail){
+
+  user.userPlans=users[i].userPlans;
 $("#register").text("Login")
 }
 
@@ -193,33 +206,27 @@ function setPreviousUsers() {
 // Add a plan to the page
 function addPlan(event){
   event.preventDefault(); 
-  console.log("adding a plan and save it locally")
-var user={};
-user.userPlans=[];
+  console.log("adding a plan and save it locally");
+
+  weather = {};
+  weather.temperature = {
+    unit : "celsius", 
+    temp : 0
+}
+cityName = $("#cityName").val();
+// var user={};
+ user.userPlans=[];
 
 user.userEmail=userEmail;
 user.userPassword=userPassword;
 
 //  get weathe rinformation
-// call weather(cityName)
-
-plan= new object()
-plan.cityName=cityName;
-plan.cityLon=cityLon;
-plan.cityLan=cityLan;
-plan.cityTemp=cityTemp;
-plan.cityWeather=cityWeather;
-
-plans.push(plan)
-
-user.userPlans.push(plans)
-
-users.push(user);
-setPreviousUsers()
+getWeather(cityName);
 
 
+// setPlans(index)
+index++;
 }
-
 
 
 function encrypte (a) {
@@ -300,7 +307,12 @@ planSubmit.on("submit",  function(event){
     //   }
     // )
 
+  }else{
+
+
+    getWeather(cityName)
   }
+
 
   var nameOfCity = cityName.val();
   var dateOfPlan = $('#datepicker').val();
@@ -348,7 +360,11 @@ planSubmit.on("submit",  function(event){
   plan.text(planOnDay);
   planDiv.append(plan);
 
-  
+
+ 
+ 
+});
+
   plansSaved.append(planDiv);
 
 
@@ -374,4 +390,44 @@ planSubmit.on("submit",  function(event){
 
 
 
-});
+function getWeather(cityName) {
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`;
+  console.log("city api", apiUrl)
+  fetch(apiUrl)
+      .then(function(response){
+          let data = response.json();
+          return data;
+      })
+      .then(function(data){
+          weather.temperature.temp = Math.floor(data.main.temp);
+          weather.description = data.weather[0].description;
+          weather.iconId = data.weather[0].icon;
+          weather.city = data.name;
+          // weather.windSpeed = data.wind.speed;
+          weather.city=data.name;
+          // weather.humidity = data.main.humidity
+          weather.country = data.sys.country;
+          weather.lat=data.coord.lat 
+          weather.lon=data.coord.lon
+    
+      })
+      
+      .then(function(){
+        displayWeather();
+        $(".city-weather.hide").removeClass("hide");
+
+      })
+    
+              // Render an error message if the city isn't found
+              .catch((error) => {
+                $("header .notification h2").text("City Not Found !");
+
+              });
+          
+};
+function displayWeather(){
+    $(".todayHeading .description").text(`${weather.description}`);
+    $(".todayTime span").text(`  ${weather.city} `);
+    $(".weatherIcon").attr("src", `./icons/${weather.iconId}.png`);
+    $(".todayHeading .Temprature span").text(`°${weather.temperature.temp}C`);
+}
