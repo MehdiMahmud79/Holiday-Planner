@@ -191,6 +191,34 @@ function getWeather(cityName) {
 };
 
 
+
+
+// Add a plan to the page
+// function addPlan(event){
+//   event.preventDefault(); 
+//   console.log("adding a plan and save it locally");
+
+//   weather = {};
+//   weather.temperature = {
+//     unit : "celsius", 
+//     temp : 0
+// }
+// cityName = $("#cityName").val();
+// // var user={};
+//  user.userPlans=[];
+
+// user.userEmail=userEmail;
+// user.userPassword=userPassword;
+
+// //  get weathe rinformation
+// getWeather(cityName);
+
+
+// // setPlans(index)
+// index++;
+// }
+
+
 function addPlan(event){
   event.preventDefault();
 
