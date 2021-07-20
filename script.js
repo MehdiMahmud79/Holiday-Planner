@@ -8,7 +8,12 @@ var user = {};
 var userEmail;
 var index = 0;
 var userPassword;
-var markers=[]
+var markers=[];
+var cityList=[];
+
+var users=[];
+var userObj={};
+var userIndex;
 const googleAPIKey = "AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE";
 
 const apiKey = "65b50ac0fd144e1fbd69be8c79bf2491";
@@ -22,17 +27,19 @@ weather.lat = 52.489471;
 weather.lng = -1.898575;
 var LOCAL_STORAGE_KEY = "savedUsers";
 
-var users = getPreviousUsers();
+ users = getPreviousUsers();
 
 function getPreviousUsers() {
-  savedPlans = localStorage.getItem(LOCAL_STORAGE_KEY);
-  console.log("local Data", savedPlans);
-  if (savedPlans) {
+  savedUsers = localStorage.getItem(LOCAL_STORAGE_KEY);
+  
+  console.log("local Data", savedUsers);
+  if (savedUsers) {
+
     $("#register").text("Login");
     $("#LoginForm").removeClass("hidden");
 
     //  we have to hide everything here
-    return JSON.parse(savedPlans);
+    return JSON.parse(savedUsers);
   } else {
     // $("#LoginForm h1").text("SignUp");
     $("#register").text("SignUp");
@@ -53,7 +60,7 @@ $(function () {
 var plans = [];
 $("#loginBtn").on("click", loadLogin);
 
-$("#register").on("click", registerUser);
+$("#register").on("click", loginSingnUp);
 
 function loadLogin(event) {
   event.preventDefault();
@@ -61,25 +68,49 @@ function loadLogin(event) {
 }
 
 // Register  a new user or login an existing user
-function registerUser(event) {
+function loginSingnUp(event) {
   event.preventDefault();
   user = {};
   user.userPlans = [];
   console.log("register user");
 
-  userEmail = $("#userEmail").val().trim();
-
-  userPassword = $("#userPassword").val().trim();
+  userObj.userName = $("#userName").val().trim();
+  userObj.userEmail = $("#userEmail").val().trim();
+  userObj.userPassword = $("#userPassword").val().trim();
+  
 
   $("#register").text("SignUp");
 
-  for (var i in users) {
-    console.log("i", i);
-    if (userEmail === users[i].userEmail) {
-      user.userPlans = users[i].userPlans;
-      $("#register").text("Login");
+if(users){
+    for (var i in users) {
+      console.log("i", i);
+      if (userObj.userEmail === users[i].userEmail && userObj.userPassword === users[i].userPassword) {
+          console.log(" The user exists")
+          userIndex=i;
+          loadPlans(userIndex);
+          }
+          else{
+            var modalBox = $("<div></div>");
+            modalBox.dialog({
+              modal: true,
+              title: "Error!",
+              open: function () {
+                var markup = "User name/ Password incorrect!";
+                $(this).html(markup);
+              },
+              buttons: {
+                Ok: function () {
+                  $(this).dialog("close");
+                },
+              },
+            });     
+            return;
+          }
+        user.userPlans = users[i].userPlans;
+        $("#register").text("Login");
+      }
     }
-  }
+  
   // user.userEmail=encrypte(userEmail)
   // user.userPassword=encrypte(userPassword)
   user.userEmail = userEmail;
@@ -87,6 +118,24 @@ function registerUser(event) {
 
   $("#LoginForm").addClass("hidden");
   $("#userName").text(`${userEmail} plans: `);
+}
+
+
+function loadPlans(userIndex) {
+
+     var planLength= users[userIndex].userCities.length
+    for (var i=0; i<planLength;i++){
+
+      weather = {};
+      weather.temperature = {
+        unit: "celsius",
+        temp: 0,
+      };
+      getWeather(users[userIndex].userCities[i].cityName);
+      index++;
+      cityList.push(index);
+    }
+
 }
 
 // save plans to the local storage
@@ -164,12 +213,13 @@ function getWeather(cityName) {
 }
 
 
-
+// var userCities=users[index].userCities;
 function addPlan(event) {
   event.preventDefault();
 
+  userPlanObj={};
   console.log("adding a plan and save it locally");
-
+  
   weather = {};
   weather.temperature = {
     unit: "celsius",
@@ -178,6 +228,14 @@ function addPlan(event) {
   cityName = $("#cityName").val();
   cityDate = $("#datepicker").val();
   cityPlan = $("#cityPlan").val();
+
+  userPlanObj.cityName=cityName;
+  userPlanObj.cityDate=cityDate;
+  userPlanObj.cityPlan=cityPlan;
+  
+  userCities.push(userPlanObj);
+  // userObj.userCities;
+  users.push(userObj)
   // var user={};
   user.userPlans = [];
 
@@ -221,6 +279,7 @@ function addPlan(event) {
 
   // setPlans(index)
   index++;
+  cityList.push(index);
 }
 
 $("#planSubmit").on("submit", addPlan);
@@ -234,7 +293,7 @@ function creatPlanList() {
   var wfull = $(`<div class="flex flex-row w-full"> `);
   var mainCont = $(`<div class="flex shadow-sm rounded-l p-3 bg-gray-300">`);
   var submittedPlan = $(`<div id="submittedPlan" class=" block" >`);
-  var mb2 = $(`<div class="main-container flex  mb-2">`);
+  var mb2 = $(`<div id="${index}" class="  main-container flex  mb-2">`);
 
   w40.append(
     `<h2 class="todayDate"><i class="fa fa-calendar m-2" aria-hidden="true"></i><span class="m-2">${cityDate} </span></h2>`
@@ -259,7 +318,7 @@ function creatPlanList() {
   // wfull.append(`<button id="removePlan" class="bg-red-200 hover:bg-red-400 text-white text-2xl  p-2  rounded-r "><i class="fa fa-remove" style="font-size:48px;color:red"></i></button>`);
 
   wfull.append(
-    `<i id="delete-plan-btn" class=" fa fa-remove relative -pl-10 text-red-100 hover:text-red-400 cursor-pointer" ></i>`
+    `<i class="delete-plan-btn fa fa-remove relative -pl-10 text-red-100 hover:text-red-400 cursor-pointer" ></i>`
   );
 
   mainCont.append(w40);
@@ -271,14 +330,25 @@ function creatPlanList() {
   mb2.append(wfull);
 
   planContainer.append(mb2);
-  $("#delete-plan-btn").on("click", handleRemoveItem);
+  $(".delete-plan-btn").on("click", handleRemoveItem);
 }
 
 function handleRemoveItem(event) {
   // convert button we pressed (`event.target`) to a jQuery DOM object
   var btnClicked = $(event.target);
-  console.log(btnClicked, btnClicked.parent().parent());
+  console.log(btnClicked, btnClicked.parent());
 
   // get the parent `<li>` element from the button we pressed and remove it
-  btnClicked.parent().parent().remove();
+
+  var k=parseInt(btnClicked.parent().parent().attr("id"));
+  console.log("k",k)
+  for (var i=0;i<cityList.length;i++){
+
+    if(cityList[i]===k){
+      cityList.splice(i,1);
+    }
+  }
+   console.log("cityList", cityList);
+
+   btnClicked.parent().parent().remove(); 
 }

@@ -28,7 +28,7 @@ function initMap(){
     for(var i = 1;i < markers.length;i++){
       // Add marker
       addMarker(markers[i]); 
-      console.log(markers[i])  
+      console.log(markers[i]);  
 
     }
 
