@@ -4,144 +4,125 @@ var cityName;
 var cityDate;
 var cityPlan;
 var dayPlan = $("#dayPlan");
-var  user={};
+var user = {};
 var userEmail;
-var index=0;
+var index = 0;
 var userPassword;
+var markers=[]
+const googleAPIKey = "AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE";
 
-const googleAPIKey="AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE"
-
-const apiKey="65b50ac0fd144e1fbd69be8c79bf2491"
+const apiKey = "65b50ac0fd144e1fbd69be8c79bf2491";
 
 var weather = {};
 weather.temperature = {
-  unit : "celsius", 
-  temp : 0
-}
+  unit: "celsius",
+  temp: 0,
+};
+weather.lat = 52.489471;
+weather.lng = -1.898575;
 var LOCAL_STORAGE_KEY = "savedUsers";
 
-
-var users=getPreviousUsers();
-
+var users = getPreviousUsers();
 
 function getPreviousUsers() {
-   savedPlans = localStorage.getItem(LOCAL_STORAGE_KEY);
-console.log("local Data", savedPlans)
+  savedPlans = localStorage.getItem(LOCAL_STORAGE_KEY);
+  console.log("local Data", savedPlans);
   if (savedPlans) {
-    $("#register").text("Login")
-     $("#LoginForm").removeClass("hidden"); 
-  
-//  we have to hide everything here
-    return JSON.parse(savedPlans);
+    $("#register").text("Login");
+    $("#LoginForm").removeClass("hidden");
 
+    //  we have to hide everything here
+    return JSON.parse(savedPlans);
   } else {
-    $("#LoginForm h1").text("SignUp")
-    $("#register").text("SignUp")
-    $("#LoginForm").removeClass("hidden"); 
-//  we have to hide everything here
-return [];
+    $("#LoginForm h1").text("SignUp");
+    $("#register").text("SignUp");
+    $("#LoginForm").removeClass("hidden");
+    //  we have to hide everything here
+    return [];
   }
 }
 
+$(function () {
+  $("#datepicker").datepicker({ dateFormat: "dd-mm-yy" });
+});
 
+$(function () {
+  $("#dialog").dialog();
+});
 
+var plans = [];
+$("#loginBtn").on("click", loadLogin);
 
+$("#register").on("click", registerUser);
 
-$( function() {
-  $('#datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
-} );
-
-$( function() {
-  $( "#dialog" ).dialog();
-} );
-
-
-var plans = []
-$("#loginBtn").on("click", loadLogin)
-
-$("#register").on("click", registerUser)
-
-
-function loadLogin(event){
-    event.preventDefault(); 
-$("#LoginForm").removeClass("hidden"); 
-
+function loadLogin(event) {
+  event.preventDefault();
+  $("#LoginForm").removeClass("hidden");
 }
 
 // Register  a new user or login an existing user
-function registerUser(event){
-  event.preventDefault(); 
- user={};
-user.userPlans=[];
-console.log("register user")
+function registerUser(event) {
+  event.preventDefault();
+  user = {};
+  user.userPlans = [];
+  console.log("register user");
 
- userEmail=$("#userEmail").val().trim();
+  userEmail = $("#userEmail").val().trim();
 
- userPassword=$("#userPassword").val().trim();
+  userPassword = $("#userPassword").val().trim();
 
-$("#register").text("SignUp")
+  $("#register").text("SignUp");
 
-for(var i in users){
-  console.log("i", i)
-if (userEmail===users[i].userEmail){
+  for (var i in users) {
+    console.log("i", i);
+    if (userEmail === users[i].userEmail) {
+      user.userPlans = users[i].userPlans;
+      $("#register").text("Login");
+    }
+  }
+  // user.userEmail=encrypte(userEmail)
+  // user.userPassword=encrypte(userPassword)
+  user.userEmail = userEmail;
+  user.userPassword = userPassword;
 
-  user.userPlans=users[i].userPlans;
-$("#register").text("Login")
-}
-
-}
-// user.userEmail=encrypte(userEmail)
-// user.userPassword=encrypte(userPassword)
-user.userEmail=userEmail;
-user.userPassword=userPassword;
-
-
-$("#LoginForm").addClass("hidden"); 
-$("#userName").text(`${userEmail} plans: `)
+  $("#LoginForm").addClass("hidden");
+  $("#userName").text(`${userEmail} plans: `);
 }
 
 // save plans to the local storage
 function setPreviousUsers() {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(users));
-
 }
 
-
-
-
-function encrypte (a) {
-    var a = a.split("");
-  var   n= a.length;
-  b=[];
-    for(var i = 0; i <n; i++) {
-        var ch = a[i];
-        var index = 0;
-        var m = ch.charCodeAt(index)+1;
-        b.push(String.fromCharCode(m));
-    }
-   console.log(b.join("")) 	
-    b=b.join(""); 
-    // decrypt(b);
-return b;
+function encrypte(a) {
+  var a = a.split("");
+  var n = a.length;
+  b = [];
+  for (var i = 0; i < n; i++) {
+    var ch = a[i];
+    var index = 0;
+    var m = ch.charCodeAt(index) + 1;
+    b.push(String.fromCharCode(m));
   }
-  function decrypt (a) {
-    var a = a.split("");
-  var   n= a.length;
-  b=[];
-    for(var i = 0; i <n; i++) {
-        var ch = a[i];
-        var index = 0;
-        var m = ch.charCodeAt(index)-1;
-        b.push(String.fromCharCode(m));
-    }
-   console.log(b.join("")) 	
-    b=b.join(""); 
-return b;
+  console.log(b.join(""));
+  b = b.join("");
+  // decrypt(b);
+  return b;
+}
+function decrypt(a) {
+  var a = a.split("");
+  var n = a.length;
+  b = [];
+  for (var i = 0; i < n; i++) {
+    var ch = a[i];
+    var index = 0;
+    var m = ch.charCodeAt(index) - 1;
+    b.push(String.fromCharCode(m));
   }
-
-
-
-
+  console.log(b.join(""));
+  b = b.join("");
+  return b;
+}
 
 // planSubmit.on("submit",  function(event){
 //   event.preventDefault();
@@ -149,157 +130,155 @@ return b;
 
 function getWeather(cityName) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`;
-  console.log("city api", apiUrl)
+  console.log("city api", apiUrl);
   fetch(apiUrl)
-      .then(function(response){
-          let data = response.json();
-          return data;
-      })
-      .then(function(data){
-          weather.temperature.temp = Math.floor(data.main.temp);
-          weather.description = data.weather[0].description;
-          weather.iconId = data.weather[0].icon;
-          weather.city = data.name;
-          // weather.windSpeed = data.wind.speed;
-          weather.city=data.name;
-          // weather.humidity = data.main.humidity
-          weather.country = data.sys.country;
-          weather.lat=data.coord.lat 
-          weather.lon=data.coord.lon
-    
-      })
+    .then(function (response) {
+      let data = response.json();
+      return data;
+    })
+    .then(function (data) {
+      weather.temperature.temp = Math.floor(data.main.temp);
+      weather.description = data.weather[0].description;
+      weather.iconId = data.weather[0].icon;
+      weather.city = data.name;
+      // weather.windSpeed = data.wind.speed;
+      weather.city = data.name;
+      // weather.humidity = data.main.humidity
+      weather.country = data.sys.country;
+      weather.lat = data.coord.lat;
+      weather.lng = data.coord.lon;
+    })
+
+    .then(function () {
+      creatPlanList();
+      // findPlaces(-weather.lat, weather.lng );
       
-      .then(function(){
-        creatPlanList();
+      initMap()
+      $("#GoogleMap").removeClass("hidden")
+    })
 
-        
-
-      })
-    
-              // Render an error message if the city isn't found
-              .catch((error) => {
-                $("header .notification h2").text("City Not Found !");
-
-              });
-          
-};
+    // Render an error message if the city isn't found
+    .catch((error) => {
+      $("header .notification h2").text("City Not Found !");
+    });
+}
 
 
-function addPlan(event){
+
+function addPlan(event) {
   event.preventDefault();
 
   console.log("adding a plan and save it locally");
 
   weather = {};
   weather.temperature = {
-    unit : "celsius", 
-    temp : 0
-}
-cityName = $("#cityName").val();
-cityDate=$('#datepicker').val();
-cityPlan=$('#cityPlan').val();
-// var user={};
- user.userPlans=[];
+    unit: "celsius",
+    temp: 0,
+  };
+  cityName = $("#cityName").val();
+  cityDate = $("#datepicker").val();
+  cityPlan = $("#cityPlan").val();
+  // var user={};
+  user.userPlans = [];
 
-user.userEmail=userEmail;
-user.userPassword=userPassword;
-  if (cityDate == ""){
+  user.userEmail = userEmail;
+  user.userPassword = userPassword;
+  if (cityDate == "") {
     var modalBox = $("<div></div>");
-    modalBox.dialog(
-    {
+    modalBox.dialog({
       modal: true,
       title: "Error!",
-      open: function() {
-        var markup = 'Please enter a Date';
+      open: function () {
+        var markup = "Please enter a Date";
         $(this).html(markup);
       },
       buttons: {
         Ok: function () {
-            $(this).dialog("close");
-        }
-      }
-    }
-  )
+          $(this).dialog("close");
+        },
+      },
+    });
 
-  return;
-
-} else if(cityName== ""){
-  var modalBox = $("<div></div>");
-    modalBox.dialog(
-    {
+    return;
+  } else if (cityName == "") {
+    var modalBox = $("<div></div>");
+    modalBox.dialog({
       modal: true,
       title: "Error!",
-      open: function() {
-        var markup = 'Please enter a City';
+      open: function () {
+        var markup = "Please enter a City";
         $(this).html(markup);
       },
       buttons: {
         Ok: function () {
-            $(this).dialog("close");
-        }
-      }
-    }
-  )
+          $(this).dialog("close");
+        },
+      },
+    });
+  } else {
+    getWeather(cityName);
+  }
 
-}else{
-
-  getWeather(cityName);
-
-
+  // setPlans(index)
+  index++;
 }
 
+$("#planSubmit").on("submit", addPlan);
 
-// setPlans(index)
-index++;
-}
+var planContainer = $("#planContainer");
 
-$("#planSubmit").on("submit", addPlan)
+function creatPlanList() {
+  var w40 = $(`<div class="block w-40">`);
+  var w20 = $(`<div class="w-20">`);
 
-var planContainer=$("#planContainer");
+  var wfull = $(`<div class="flex flex-row w-full"> `);
+  var mainCont = $(`<div class="flex shadow-sm rounded-l p-3 bg-gray-300">`);
+  var submittedPlan = $(`<div id="submittedPlan" class=" block" >`);
+  var mb2 = $(`<div class="main-container flex  mb-2">`);
 
-function creatPlanList(){ 
+  w40.append(
+    `<h2 class="todayDate"><i class="fa fa-calendar m-2" aria-hidden="true"></i><span class="m-2">${cityDate} </span></h2>`
+  );
+  w40.append(
+    `<h2 class="cityName uppercase m-2 text-2xl"><i class="fa fa-map-marker local" aria-hidden="true"></i><span class="uppercase text-red-900">${weather.city}</span></h2>`
+  );
+  w40.append(
+    `<p class="Temprature m-2 text-2xl"><span class="relative text-lg text-blue-800 -top-2">°${weather.temperature.temp}C</span> </p>`
+  );
 
-var w40=$(`<div class="block w-40">`);
-var w20=$(`<div class="w-20">`)
+  w20.append(
+    `<img class="weatherIcon " src= "./icons/${weather.iconId}.png" alt="weather image desc.">`
+  );
+  w20.append(
+    `<h3 class="description text-xl text-gray-700 pt-3">${weather.description}</h3>`
+  );
 
-var wfull=$(`<div class="flex flex-row w-full"> `)
-var mainCont=$(`<div class="flex shadow-sm rounded-l p-3 bg-gray-300">`)
-var submittedPlan=$(`<div id="submittedPlan" class=" block" >`)
-var mb2=$(`<div class="main-container flex  mb-2">`)
+  wfull.append(
+    `<textarea disabled id="cityPlann" name="text" id="dayPlan" class=" bg-white mx-auto p-3 mr-3 resize-none w-full">${cityPlan}</textarea>`
+  );
+  // wfull.append(`<button id="removePlan" class="bg-red-200 hover:bg-red-400 text-white text-2xl  p-2  rounded-r "><i class="fa fa-remove" style="font-size:48px;color:red"></i></button>`);
 
-w40.append(`<h2 class="todayDate"><i class="fa fa-calendar m-2" aria-hidden="true"></i><span class="m-2">${cityDate} </span></h2>`);
-w40.append(`<h2 class="cityName uppercase m-2 text-2xl"><i class="fa fa-map-marker local" aria-hidden="true"></i><span class="uppercase text-red-900">${weather.city}</span></h2>`);
-w40.append(`<p class="Temprature m-2 text-2xl"><span class="relative text-lg text-blue-800 -top-2">°${weather.temperature.temp}C</span> </p>`);
+  wfull.append(
+    `<i id="delete-plan-btn" class=" fa fa-remove relative -pl-10 text-red-100 hover:text-red-400 cursor-pointer" ></i>`
+  );
 
-w20.append(`<img class="weatherIcon " src= "./icons/${weather.iconId}.png" alt="weather image desc.">`);
-w20.append(`<h3 class="description text-xl text-gray-700 pt-3">${weather.description}</h3>`);
+  mainCont.append(w40);
+  mainCont.append(w20);
 
-wfull.append(`<textarea disabled id="cityPlann" name="text" id="dayPlan" class=" bg-white mx-auto p-3 mr-3 resize-none w-full">${cityPlan}</textarea>`);
-// wfull.append(`<button id="removePlan" class="bg-red-200 hover:bg-red-400 text-white text-2xl  p-2  rounded-r "><i class="fa fa-remove" style="font-size:48px;color:red"></i></button>`);
+  submittedPlan.append(mainCont);
 
-wfull.append(`<i id="delete-plan-btn" class=" fa fa-remove relative -pl-10 text-red-100 hover:text-red-400 cursor-pointer" ></i>`);
+  mb2.append(submittedPlan);
+  mb2.append(wfull);
 
-mainCont.append(w40);
-mainCont.append(w20);
-
-submittedPlan.append(mainCont);
-
-
-mb2.append(submittedPlan);
-mb2.append(wfull);
-
-planContainer.append(mb2);
-$("#delete-plan-btn").on('click', handleRemoveItem);
-
-
+  planContainer.append(mb2);
+  $("#delete-plan-btn").on("click", handleRemoveItem);
 }
 
 function handleRemoveItem(event) {
   // convert button we pressed (`event.target`) to a jQuery DOM object
   var btnClicked = $(event.target);
-  console.log(btnClicked, btnClicked.parent().parent())
+  console.log(btnClicked, btnClicked.parent().parent());
 
   // get the parent `<li>` element from the button we pressed and remove it
   btnClicked.parent().parent().remove();
-
-}  
+}
