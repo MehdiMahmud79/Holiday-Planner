@@ -185,34 +185,6 @@ function getWeather(cityName) {
 };
 
 
-
-
-// Add a plan to the page
-// function addPlan(event){
-//   event.preventDefault(); 
-//   console.log("adding a plan and save it locally");
-
-//   weather = {};
-//   weather.temperature = {
-//     unit : "celsius", 
-//     temp : 0
-// }
-// cityName = $("#cityName").val();
-// // var user={};
-//  user.userPlans=[];
-
-// user.userEmail=userEmail;
-// user.userPassword=userPassword;
-
-// //  get weathe rinformation
-// getWeather(cityName);
-
-
-// // setPlans(index)
-// index++;
-// }
-
-
 function addPlan(event){
   event.preventDefault();
 
@@ -293,7 +265,7 @@ var w20=$(`<div class="w-20">`)
 var wfull=$(`<div class="flex flex-row w-full"> `)
 var mainCont=$(`<div class="flex shadow-sm rounded-l p-3 bg-gray-300">`)
 var submittedPlan=$(`<div id="submittedPlan" class=" block" >`)
-var mb2=$(`<div class=" flex  mb-2">`)
+var mb2=$(`<div class="main-container flex  mb-2">`)
 
 w40.append(`<h2 class="todayDate"><i class="fa fa-calendar m-2" aria-hidden="true"></i><span class="m-2">${cityDate} </span></h2>`);
 w40.append(`<h2 class="cityName uppercase m-2 text-2xl"><i class="fa fa-map-marker local" aria-hidden="true"></i><span class="uppercase text-red-900">${weather.city}</span></h2>`);
@@ -302,14 +274,13 @@ w40.append(`<p class="Temprature m-2 text-2xl"><span class="relative text-lg tex
 w20.append(`<img class="weatherIcon " src= "./icons/${weather.iconId}.png" alt="weather image desc.">`);
 w20.append(`<h3 class="description text-xl text-gray-700 pt-3">${weather.description}</h3>`);
 
-wfull.append(`<textarea id="cityPlann" name="text" id="dayPlan" class="mx-auto p-3 resize-none w-full">${cityPlan}</textarea>`);
-wfull.append(`<button id="removePlan" class="bg-red-200 hover:bg-red-400 text-white text-2xl  p-2  rounded-r "><i class="fa fa-remove" style="font-size:48px;color:red"></i>
-</button>`);
+wfull.append(`<textarea disabled id="cityPlann" name="text" id="dayPlan" class=" bg-white mx-auto p-3 mr-3 resize-none w-full">${cityPlan}</textarea>`);
+// wfull.append(`<button id="removePlan" class="bg-red-200 hover:bg-red-400 text-white text-2xl  p-2  rounded-r "><i class="fa fa-remove" style="font-size:48px;color:red"></i></button>`);
+
+wfull.append(`<i id="delete-plan-btn" class=" fa fa-remove relative -pl-10 text-red-100 hover:text-red-400 cursor-pointer" ></i>`);
 
 mainCont.append(w40);
 mainCont.append(w20);
-// mainCont.append(wfull);
-
 
 submittedPlan.append(mainCont);
 
@@ -318,6 +289,17 @@ mb2.append(submittedPlan);
 mb2.append(wfull);
 
 planContainer.append(mb2);
+$("#delete-plan-btn").on('click', handleRemoveItem);
 
 
 }
+
+function handleRemoveItem(event) {
+  // convert button we pressed (`event.target`) to a jQuery DOM object
+  var btnClicked = $(event.target);
+  console.log(btnClicked, btnClicked.parent().parent())
+
+  // get the parent `<li>` element from the button we pressed and remove it
+  btnClicked.parent().parent().remove();
+
+}  
