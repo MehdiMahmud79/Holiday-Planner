@@ -1,159 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="tailwind.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- <link rel="stylesheet" href="/resources/demos/style.css" -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="tailwind.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="/resources/demos/style.css" -->
 </head>
+
 <body>
-    <nav class="flex items-center justify-between flex-wrap bg-gray-800 p-6">
-        <div class="flex items-center flex-shrink-0 text-white mr-6">
-          <span class="font-bold text-3xl">Holiday Planner</span>
-        </div>
-  
-        <div class="w-full block flex-grow sm:flex sm:items-center sm:w-auto">
-          <div class="text-sm sm:flex-grow">
-            <a
-              href="#"
-              class="block mt-4 sm:inline-block sm:mt-0 text-teal-200 text-blue-200 hover:text-blue-500 mr-4"
-            >
-              map
-            </a>
-            <a
-              href="#"
-              class="block mt-4 sm:inline-block sm:mt-0 text-teal-200 text-blue-200 hover:text-blue mr-4"
-            >
-              about
-            </a>
-            <a
-              href="#"
-              class="block mt-4 sm:inline-block sm:mt-0 text-teal-200 text-blue-200 hover:text-blue"
-            >
-              places to visit
-            </a>
-          </div>
-          <div>
-            <a
-              href="#"
-              id="loginBtn" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-500 hover:bg-white mt-4 md:mt-0"
-              >Login/SignUp</a>
+  <nav class="flex items-center justify-between flex-wrap bg-gray-800 p-6">
+    <div class="flex items-center flex-shrink-0 text-white mr-6">
+      <span class="font-bold text-3xl">Holiday Planner</span>
+    </div>
 
-
-
-          </div>
-        </div>
-
-      </nav>
-      <div >
-        <h1 id="userName" class="font-bold text-3xl bg-red-800 text-yellow-200 py-4 "></h1>
-      </div>      
-
-      <!-- Login signUp card -->
-      <div id="LoginForm" class=" max-w-sm mx-auto p-6 bg-white rounded-lg shadow-xl hidden">
+    <div class="w-full block flex-grow sm:flex sm:items-center sm:w-auto">
+      <div class="text-sm sm:flex-grow">
+        <a href="#" class="block mt-4 sm:inline-block sm:mt-0 text-teal-200 text-blue-200 hover:text-blue-500 mr-4">
+          map
+        </a>
         
-        <div  class="ml-6 pt-1 ">
-          <h1 ">Login</h1>
-            <form  action="submit">
-                <label for="input"> E-mail</label>
-                <input id="userEmail" class="border border-indigo-600 rounded px-2 my-2  w-full" type="email" placeholder="E-Mail address">
-                <label for="password"> Pasword</label>
-                <input  id="userPassword" class="border border-indigo-600 rounded px-2  w-full" t type="password" placeholder="password">
-                <button id="register" class="bg-blue-500 hover:bg-blue-400 text-white font-bold w-full py-1 px-4 my-2 rounded">Login</button>
-
-            </form>
-          <!-- <h4 class="text-xl text-gray-900">Traversy Media</h4>
-          <p class="text-base text-gray-600">You have a new message!</p> -->
-        </div>
-      </div>   
-      
-      
-      <div class="max-w-lg mx-auto flex p-6 bg-gray-600 rounded-lg shadow-xl my-2 planInput">
-        <div class="ml-6 pt-1">
-        <form id="planSubmit">
-            <label for="input"> City Name </label>
-            <input id="cityName" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="input the city name here" value="London">
-            <label for="input"> Date </label>
-            <input id="datepicker" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="Input date here" value="07/01/2021">
-            <label for="input"> Plans </label>
-            <textarea name="text" id="dayPlan" class="mx-auto w-full" >plan discription</textarea>
-            <button id="addPlan" class="bg-blue-500 hover:bg-blue-400 text-white font-bold w-full py-1 px-4 my-2 rounded">Add The Plan</button>
-        </form>
-     
-        </div>
+        <a href="#" class="block mt-4 sm:inline-block sm:mt-0 text-teal-200 text-blue-200 hover:text-blue mr-4">
+          about
+        </a>
+        <a href="#" class="block mt-4 sm:inline-block sm:mt-0 text-teal-200 text-blue-200 hover:text-blue">
+          places to visit
+        </a>
       </div>
+      <div>
+        <a href="#" id="loginBtn"
+          class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-500 hover:bg-white mt-4 md:mt-0">Login/SignUp</a>
 
 
 
-      <div class=" flex bg-gray-300 min-h-0 rounded-md m-1 p-1 justify-around ">
-            <div >
-              <div class="city-weather hide">
-                  <div class="flex todayHeading">
-                      <div>
-          <h2 class="todayDate"><i class="fa fa-calendar" aria-hidden="true"></i><span> Date</span></h2>
+      </div>
+    </div>
 
-                        <div class="flex">
-                          <h2 class="todayTime"><i class="fa fa-map-marker local" aria-hidden="true"></i><span>cityName</span></h2>
-                          <p class="Temprature"><span>--</span> </p>
-                        </div>
-                          <div class="flex">
-                          <img class="weatherIcon"  src="icons/unknown.png" alt="weather image desc.">
-                          <h3 class="description"></h3>
-                          </div>
-                      </div>   
- 
-                      <div>
-                    
-                      </div>
+  </nav>
+  <div>
+    <h1 id="userName" class="font-bold text-3xl bg-red-800 text-yellow-200 py-4 "></h1>
+  </div>
 
-                  </div>
+  <!-- Login signUp card -->
+  <div id="LoginForm" class=" max-w-sm mx-auto p-6 bg-white rounded-lg shadow-xl hidden">
+
+    <div class="ml-6 pt-1 ">
+      <h1 class="bg-blue-200 rounded pl-1 text-center text-white ">Login / SignUp </h1>
+
+      <div class="flex items-center justify-center w-full mb-12">
+  
+        <label for="SignUpLoginSwitch" class="flex items-center cursor-pointer">
+          <!-- toggle -->
+          <div class="relative">
+            <!-- input -->
+            <input type="checkbox" id="SignUpLoginSwitch" class="sr-only">
+            <!-- line -->
+            <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+            <!-- dot -->
+            <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+          </div>
+          <!-- label -->
+          <div class="ml-3 text-gray-700 font-medium">
+            Toggle Me!
+          </div>
+        </label>
       
-              </div>
-            </div>  
+      </div>
+        <form  action=" submit">
+          <label for="input"> User Name</label>
+          <input id="userName" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="input your Name">
+          <label for="input"> E-mail</label>
+          <input id="userEmail" class="border border-indigo-600 rounded px-2 my-2  w-full" type="email"
+            placeholder="E-Mail address">
+          <label for="password"> Pasword</label>
+          <input id="userPassword" class="border border-indigo-600 rounded px-2  w-full" t type="password"
+            placeholder="password">
+          <button id="loginBtn2" class="bg-blue-500 hover:bg-blue-400 text-white font-bold w-full py-1 px-2 my-2 rounded">Login</button>
 
-      <div class="savedPlans container">
-        <div class="plansSaved w-1/2 pt-1 left flex p-3 bg-gray-600 rounded-lg shadow-xl ">
-          <div class="w-1/2 text-2xl h-10 text-center px-auto bg-indigo-400 mx-auto border rounded"> Plans Saved:  </div>
-          
+        </form>
 
+    </div>
+  </div>
 
+  
+  <div class="max-w-lg mx-auto flex p-6 bg-gray-600 rounded-lg shadow-xl my-2 planInput">
+    <div class="ml-6 pt-1">
+      <form id="planSubmit">
+        <label for="input"> City Name </label>
+        <input id="cityName" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text"
+          placeholder="input the city name here" value="London">
+        <label for="input"> Date </label>
+        <input id="datepicker" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text"
+          placeholder="Input date here" value="07/01/2021">
+        <label for="input"> Plans </label>
+        <textarea id="cityPlan" name="text" id="dayPlan" class="mx-auto w-full">plan discription</textarea>
+        <button id="addPlan"  class="bg-blue-500 hover:bg-blue-400 text-white font-bold w-full py-1 px-4 my-2 rounded">Add The Plan</button>
+      </form>
 
-           
-
-        </div>
-      
-       <div id="GoogleMap" class="h-screen p-6 right w-1/4">
-          <h1>My google Map</h1>
-        </div>
-
-        <!-- adding google map here -->
- 
-
-   
-
-
-            <!-- scripts -->
-      <script src="googleinit.js"></script>
-
-       <script async
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE&callback=initMap">
-      </script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
-      <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-
-
+    </div>
+  </div>
 
 
-      <!-- <script src="./assets/Js/DOM.js"></script> -->
-      <script src="script.js"></script>
+  <div id="planContainer" class=" flex-1 bg-gray-600  rounded-md m-1 p-1 justify-around ">
+    <!-- add plans here -->
+  </div>
+
+
+
+
+  </div>
+
+
+
+
+  </div>
+
+  <div id="GoogleMap" class=" h-screen p-6 right w-1/4 hidden">
+    <h1>My google Map</h1>
+  </div>
+
+  <!-- adding google map here -->
+
+
+
+
+
+  <!-- scripts -->
+
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+
+
+
+
+  <!-- <script src="./assets/Js/DOM.js"></script> -->
+  <script src="script.js"></script>
+    <script src="googleinit.js"></script>
+
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE&callback=initMap&libraries=places&v=weekly">
+  </script> 
+  
 </body>
+
 </html>
