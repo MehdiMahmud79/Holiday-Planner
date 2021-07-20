@@ -48,7 +48,7 @@ return [];
 
 
 $( function() {
-  $('#datepicker').datepicker();
+  $('#datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
 } );
 
 $( function() {
@@ -171,13 +171,7 @@ function getWeather(cityName) {
       
       .then(function(){
         creatPlanList();
-        console.log(" im here")
-        $(".cityName span").text(`${weather.city} `);
-        $(".weatherIcon").attr("src", `./icons/${weather.iconId}.png`);
-        $(".description").text(`${weather.description}`);
-        $(".Temprature span").text(`°${weather.temperature.temp}C`);
-        $(".todayDate span").text(cityDate);
-        $("#cityPlann").text(cityPlan);
+
         
 
       })
@@ -292,13 +286,8 @@ $("#planSubmit").on("submit", addPlan)
 var planContainer=$("#planContainer");
 
 function creatPlanList(){ 
-  // event.preventDefault();
 
-
-
-
-
-var  w40=$(`<div class="block w-40">`);
+var w40=$(`<div class="block w-40">`);
 var w20=$(`<div class="w-20">`)
 
 var wfull=$(`<div class="flex flex-row w-full"> `)
@@ -306,15 +295,14 @@ var mainCont=$(`<div class="flex shadow-sm rounded-l p-3 bg-gray-300">`)
 var submittedPlan=$(`<div id="submittedPlan" class=" block" >`)
 var mb2=$(`<div class=" flex  mb-2">`)
 
+w40.append(`<h2 class="todayDate"><i class="fa fa-calendar m-2" aria-hidden="true"></i><span class="m-2">${cityDate} </span></h2>`);
+w40.append(`<h2 class="cityName uppercase m-2 text-2xl"><i class="fa fa-map-marker local" aria-hidden="true"></i><span class="uppercase text-red-900">${weather.city}</span></h2>`);
+w40.append(`<p class="Temprature m-2 text-2xl"><span class="relative text-lg text-blue-800 -top-2">°${weather.temperature.temp}C</span> </p>`);
 
-w40.append(`<h2 class="todayDate"><i class="fa fa-calendar m-2" aria-hidden="true"></i><span class="m-2"> Date </span></h2>`);
-w40.append(`<h2 class="cityName uppercase m-2 text-2xl"><i class="fa fa-map-marker local" aria-hidden="true"></i><span class="uppercase text-red-900"></span></h2>`);
-w40.append(`<p class="Temprature m-2 text-2xl"><span class="relative text-lg text-blue-800 -top-2">--</span> </p>`);
+w20.append(`<img class="weatherIcon " src= "./icons/${weather.iconId}.png" alt="weather image desc.">`);
+w20.append(`<h3 class="description text-xl text-gray-700 pt-3">${weather.description}</h3>`);
 
-w20.append(`<img class="weatherIcon " src="icons/unknown.png" alt="weather image desc.">`);
-w20.append(`<h3 class="description text-xl text-gray-700 pt-3"></h3>`);
-
-wfull.append(`<textarea id="cityPlann" name="text" id="dayPlan" class="mx-auto p-3 resize-none w-full"></textarea>`);
+wfull.append(`<textarea id="cityPlann" name="text" id="dayPlan" class="mx-auto p-3 resize-none w-full">${cityPlan}</textarea>`);
 wfull.append(`<button id="removePlan" class="bg-red-200 hover:bg-red-400 text-white text-2xl  p-2  rounded-r "><i class="fa fa-remove" style="font-size:48px;color:red"></i>
 </button>`);
 
