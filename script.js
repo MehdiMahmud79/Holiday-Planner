@@ -20,59 +20,59 @@
 //        }
 
 
-function getWeather(nameOfCity, planDiv){
-  var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${nameOfCity}&units=metric&appid=${WeatherAPIKey}`
+// function getWeather(nameOfCity, planDiv){
+//   var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${nameOfCity}&units=metric&appid=${WeatherAPIKey}`
 
-  fetch(requestUrl)
-  .then(function (response) {
-    return response.json(); //converts response to object
-  })
-  .then(function (data){
-    console.log(data);
+//   fetch(requestUrl)
+//   .then(function (response) {
+//     return response.json(); //converts response to object
+//   })
+//   .then(function (data){
+//     console.log(data);
 
-    var cityLon = data.coord.lon;
-    var cityLat = data.coord.lat;
+//     var cityLon = data.coord.lon;
+//     var cityLat = data.coord.lat;
 
-    var weatherNow = document.createElement("div"); //creates a new card
+//     var weatherNow = document.createElement("div"); //creates a new card
     
-    //creates multuple line break objects for spacing
-    var [lb2, lb3, lb5] = [document.createElement("br"), document.createElement("br"), document.createElement("br"), document.createElement("br")];
+//     //creates multuple line break objects for spacing
+//     var [lb2, lb3, lb5] = [document.createElement("br"), document.createElement("br"), document.createElement("br"), document.createElement("br")];
 
 
-    //creates an img element and updates the src as the weather icon URL, before appending to card
-    var weatherNowIconCont = document.createElement("img");
-    weatherNowIconCont.setAttribute("class", "Icon city bg-blue-200 rounded m-3 text-center border");
-    var Icon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
-    weatherNowIconCont.setAttribute("src", Icon);
-    weatherNow.appendChild(weatherNowIconCont);
+//     //creates an img element and updates the src as the weather icon URL, before appending to card
+//     var weatherNowIconCont = document.createElement("img");
+//     weatherNowIconCont.setAttribute("class", "Icon city bg-blue-200 rounded m-3 text-center border");
+//     var Icon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+//     weatherNowIconCont.setAttribute("src", Icon);
+//     weatherNow.appendChild(weatherNowIconCont);
 
-    weatherNow.appendChild(lb2);
+//     weatherNow.appendChild(lb2);
 
-    //creates div to hold forecast tenperature, updates then appends to card
-    var weatherNowTemp = document.createElement("div");
-    weatherNowTemp.setAttribute("class", "Temp city bg-blue-200 rounded m-3 text-center border ");
-    weatherNowTemp.textContent = `Temperature: ${data.main.temp}°C`;
-    weatherNow.appendChild(weatherNowTemp);
+//     //creates div to hold forecast tenperature, updates then appends to card
+//     var weatherNowTemp = document.createElement("div");
+//     weatherNowTemp.setAttribute("class", "Temp city bg-blue-200 rounded m-3 text-center border ");
+//     weatherNowTemp.textContent = `Temperature: ${data.main.temp}°C`;
+//     weatherNow.appendChild(weatherNowTemp);
 
-    weatherNow.appendChild(lb3);
+//     weatherNow.appendChild(lb3);
     
-    //crates element to hold humidity, updates content then appends to card
-    var weatherNowDesc = document.createElement("div");
-    weatherNowDesc.setAttribute("class", " WeatherDesc city bg-blue-200 rounded m-3 text-center border");
-    weatherNowDesc.textContent = `${data.weather[0].description}`;
-    weatherNow.appendChild(weatherNowDesc);
+//     //crates element to hold humidity, updates content then appends to card
+//     var weatherNowDesc = document.createElement("div");
+//     weatherNowDesc.setAttribute("class", " WeatherDesc city bg-blue-200 rounded m-3 text-center border");
+//     weatherNowDesc.textContent = `${data.weather[0].description}`;
+//     weatherNow.appendChild(weatherNowDesc);
 
-    weatherNow.appendChild(lb5);
+//     weatherNow.appendChild(lb5);
 
-    weatherNow.setAttribute("class", "flex-col items-center bg-blue-300 border rounded cityDiv");
-    planDiv.append(weatherNow);
+//     weatherNow.setAttribute("class", "flex-col items-center bg-blue-300 border rounded cityDiv");
+//     planDiv.append(weatherNow);
   
-    return {weatherNow, ;
+//     return {weatherNow, ;
 
-  });
+//   });
 
 
-}
+// }
 
 
 
