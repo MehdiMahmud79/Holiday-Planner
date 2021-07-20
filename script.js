@@ -34,7 +34,7 @@ function getPreviousUsers() {
     //  we have to hide everything here
     return JSON.parse(savedPlans);
   } else {
-    $("#LoginForm h1").text("SignUp");
+    // $("#LoginForm h1").text("SignUp");
     $("#register").text("SignUp");
     $("#LoginForm").removeClass("hidden");
     //  we have to hide everything here

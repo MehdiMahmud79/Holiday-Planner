@@ -1,6 +1,9 @@
 
-function initMap(){
+let map;
+let service;
+let infowindow;
 
+function initMap(){
     // Map options
     var options = {
       zoom:8,
@@ -8,6 +11,7 @@ function initMap(){
     }
     // New map
     var map = new google.maps.Map(document.getElementById('GoogleMap'), options);
+  map.setMapTypeId('roadmap');
 
         // Add marker
      var markerObj={
@@ -17,6 +21,7 @@ function initMap(){
       content:cityPlan
 
     }
+
      markers.push(markerObj);
   
         // Loop through markers
@@ -56,6 +61,13 @@ function addMarker(props){
             }
     }
   }
+
+
+
+  // This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
 // function initMap(){
 //     // Map options
 //     var options = {
@@ -114,28 +126,28 @@ function addMarker(props){
 //     }
 
     // Add Marker Function
-    function addMarker(props){
-      var marker = new google.maps.Marker({
-        position:props.coords,
-        map:map,
-        //icon:props.iconImage
-      });
+    // function addMarker(props){
+    //   var marker = new google.maps.Marker({
+    //     position:props.coords,
+    //     map:map,
+    //     //icon:props.iconImage
+    //   });
 
-      // Check for customicon
-      if(props.iconImage){
-        // Set icon image
-        marker.setIcon(props.iconImage);
-      }
+    //   // Check for customicon
+    //   if(props.iconImage){
+    //     // Set icon image
+    //     marker.setIcon(props.iconImage);
+    //   }
 
-      // Check content
-      if(props.content){
-        var infoWindow = new google.maps.InfoWindow({
-          content:props.content
-        });
+    //   // Check content
+    //   if(props.content){
+    //     var infoWindow = new google.maps.InfoWindow({
+    //       content:props.content
+    //     });
 
-        marker.addListener('click', function(){
-          infoWindow.open(map, marker);
-        });
-      }
-    }
+    //     marker.addListener('click', function(){
+    //       infoWindow.open(map, marker);
+    //     });
+    //   }
+    // }
 //   }
