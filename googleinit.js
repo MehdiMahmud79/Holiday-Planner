@@ -13,7 +13,9 @@ function initMap(){
      var markerObj={
       coords:{lat:weather.lat,lng:weather.lng}, // get this from the city name lan lon
       map:map,
-      iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+      iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+      content:cityPlan
+
     }
      markers.push(markerObj);
   
@@ -29,11 +31,29 @@ function initMap(){
     
 
 function addMarker(props){
+
       var marker = new google.maps.Marker({
         position:props.coords,
         map:map,
         icon:props.iconImage,
       });
+
+            // Check for customicon
+            if(props.iconImage){
+              // Set icon image
+              marker.setIcon(props.iconImage);
+            }
+      
+            // Check content
+            if(props.content){
+              var infoWindow = new google.maps.InfoWindow({
+                content:props.content
+              });
+      
+              marker.addListener('click', function(){
+                infoWindow.open(map, marker);
+              });
+            }
     }
   }
 // function initMap(){
@@ -93,29 +113,29 @@ function addMarker(props){
 //       addMarker(markers[i]);
 //     }
 
-//     // Add Marker Function
-//     function addMarker(props){
-//       var marker = new google.maps.Marker({
-//         position:props.coords,
-//         map:map,
-//         //icon:props.iconImage
-//       });
+    // Add Marker Function
+    function addMarker(props){
+      var marker = new google.maps.Marker({
+        position:props.coords,
+        map:map,
+        //icon:props.iconImage
+      });
 
-//       // Check for customicon
-//       if(props.iconImage){
-//         // Set icon image
-//         marker.setIcon(props.iconImage);
-//       }
+      // Check for customicon
+      if(props.iconImage){
+        // Set icon image
+        marker.setIcon(props.iconImage);
+      }
 
-//       // Check content
-//       if(props.content){
-//         var infoWindow = new google.maps.InfoWindow({
-//           content:props.content
-//         });
+      // Check content
+      if(props.content){
+        var infoWindow = new google.maps.InfoWindow({
+          content:props.content
+        });
 
-//         marker.addListener('click', function(){
-//           infoWindow.open(map, marker);
-//         });
-//       }
-//     }
+        marker.addListener('click', function(){
+          infoWindow.open(map, marker);
+        });
+      }
+    }
 //   }
