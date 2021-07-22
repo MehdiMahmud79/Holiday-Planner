@@ -284,7 +284,7 @@ function addPlan(event) {
   userPlanObj.cityDate=cityDate;
   userPlanObj.cityPlan=cityPlan;
   
-  userCities.push(userPlanObj);
+  users.userCities.push(userPlanObj);
   // userObj.userCities;
   users.push(userObj)
   // var user={};
