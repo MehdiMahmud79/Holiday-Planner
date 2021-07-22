@@ -48,7 +48,7 @@ var userObj = {
 
 };
 
-$("#Sign_Up_Button").on("click", function(event){
+$("#Sign_Up_Button").on("click", function(){
   // event.preventDefault();
 
   $("#Sign_Up_Button").removeClass("bg-gray-500 hover:bg-gray-400 ");
@@ -57,6 +57,8 @@ $("#Sign_Up_Button").on("click", function(event){
   $("#Log_In_Button").addClass("bg-gray-500 hover:bg-gray-400");
   $(".logInForm").addClass("hidden");
   $(".signUpForm").removeClass("hidden");
+  // userObj.userEmail = $("#userEmailSignUp").val().trim();
+  // userObj.userPassword = $("#userPasswordSignUp").val();
 
 });
 
@@ -67,32 +69,46 @@ $("#Log_In_Button").on("click", function(){
   $("#Sign_Up_Button").addClass("bg-gray-500 hover:bg-gray-400");  
   $(".signUpForm").addClass("hidden");
   $(".logInForm").removeClass("hidden");
+  // userObj.userEmail = $("#userEmailLogIn").val().trim();
+  // userObj.userPassword = $("#userPasswordLogIn").val();
 });
 
-$("#signUpBtn").on("submit", function(event){
+$("#signUpBtn").on("click", function(event){
   event.preventDefault();
 
     user = {};
     user.userPlans = [];
-    console.log("register user");
+    console.log("register/signUpBtn a user");
   
   
   
     userObj.userName = $("#userName").val().trim();
-    userObj.userEmail = $("#userEmail").val().trim();
-    userObj.userPassword = $("#userPassword").val();
+    console.log(userObj.userName);
+
     var repeatedPassword = $("#userPasswordRepeat").val();
+    console.log(repeatedPassword);
 
+    userObj.userEmail = $("#userEmailSignUp").val().trim();
+    console.log(userObj.userEmail);
 
-    
-
-    if (userObj.userPassword !== repeatedPassword ){
-      createModal("Passwords do not match, Please try again!");
+    userObj.userPassword = $("#userPasswordSignUp").val();
+    console.log(userObj.userPassword);
+ 
+    if (userObj.userName =="" ){
+      createModal("inpur the User Name and try again !");
       return;
+    }
 
+    if (userObj.userEmail == "" ){
+      createModal("input your ermail, Please try again!");
+      return;
+    }
+
+    if (userObj.userPassword =="" || repeatedPassword ===""){
+      createModal("inpur the password and try again !");
+      return;
     }
   
-    $("#register").text("SignUp");
   
   if(users){
       for (var i in users) {
@@ -103,21 +119,7 @@ $("#signUpBtn").on("submit", function(event){
             loadPlans(userIndex);
             }
             else{
-              var modalBox = $("<div></div>");
-              modalBox.dialog({
-                modal: true,
-                title: "Error!",
-                open: function () {
-                  var markup = "User name/ Password incorrect!";
-                  $(this).html(markup);
-                },
-                buttons: {
-                  Ok: function () {
-                    $(this).dialog("close");
-                  },
-                },
-              });     
-              return;
+              createModal("User name/ Password incorrect!");
             }
           user.userPlans = users[i].userPlans;
           $("#register").text("Login");
