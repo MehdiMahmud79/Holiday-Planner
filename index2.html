@@ -37,9 +37,6 @@
       <div>
         <a href="#" id="loginBtn"
           class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-500 hover:bg-white mt-4 md:mt-0">Login/SignUp</a>
-
-
-
       </div>
     </div>
 
@@ -49,48 +46,55 @@
   </div>
 
   <!-- Login signUp card -->
-  <div id="LoginForm" class=" max-w-sm mx-auto p-6 bg-white rounded-lg shadow-xl hidden">
+  <div id="LoginForm" class=" max-w-sm mx-auto p-6 bg-gray-300 my-5 rounded-lg shadow-xl hidden">
 
     <div class="ml-6 pt-1 ">
-      <h1 class="bg-blue-200 rounded pl-1 text-center text-white ">Login / SignUp </h1>
 
-      <div class="flex items-center justify-center w-full mb-12">
-  
-        <label for="SignUpLoginSwitch" class="flex items-center cursor-pointer">
-          <!-- toggle -->
-          <div class="relative">
-            <!-- input -->
-            <input type="checkbox" id="SignUpLoginSwitch" class="sr-only">
-            <!-- line -->
-            <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
-            <!-- dot -->
-            <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
-          </div>
-          <!-- label -->
-          <div class="ml-3 text-gray-700 font-medium">
-            Toggle Me!
-          </div>
-        </label>
-      
-      </div>
-        <form  action=" submit">
+
+        <form class="signUpForm " action=" submit">
+          <div class="flex items-center justify-center w-full mb-4">
+            <button class="bg-green-500 hover:bg-green-400 text-white font-bold w-full py-1 px-2 my-2 ">SignUp</button>  
+            <button class="bg-gray-500 hover:bg-gray-400 text-white font-bold w-full py-1 px-2 my-2 ">Log in</button>  
+         </div>
+          <h1 class="text-center text-xl text-blue-600 font-bold">Sign Up</h1>
           <label for="input"> User Name</label>
-          <input id="userName" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="input your Name">
+          <input id="userName" class="border border-indigo-600 rounded px-2 my-2  w-full" type="text" placeholder="input your Name *">
           <label for="input"> E-mail</label>
           <input id="userEmail" class="border border-indigo-600 rounded px-2 my-2  w-full" type="email"
-            placeholder="E-Mail address">
+            placeholder="E-Mail address *">
           <label for="password"> Pasword</label>
-          <input id="userPassword" class="border border-indigo-600 rounded px-2  w-full" t type="password"
-            placeholder="password">
-          <button id="loginBtn2" class="bg-blue-500 hover:bg-blue-400 text-white font-bold w-full py-1 px-2 my-2 rounded">Login</button>
+          <input id="userPassword" class="border border-indigo-600 rounded px-2 my-2 w-full" t type="password"
+            placeholder="password *">
+          <label for="password"> Repeat Pasword</label>
+          <input id="userPasswordRepeat" class="border border-indigo-600 rounded px-2 my-2  w-full" t type="password"
+              placeholder="Repeat password *">
+          <button id="signUpBtn" class="bg-blue-500 hover:bg-blue-400 text-white font-bold w-full py-1 px-2 my-2 rounded">Get Started</button>
+
+        </form>
+
+        <form class="loginForm " action=" submit">
+          <div class="flex items-center justify-center w-full mb-4">
+            <button class="bg-gray-500 hover:bg-gray-400 text-white font-bold w-full py-1 px-2 my-2 ">SignUp</button>  
+            <button class="bg-green-500 hover:bg-green-400 text-white font-bold w-full py-1 px-2 my-2 ">Log in</button>  
+         </div>
+          <h1 class="text-center text-xl text-blue-600 font-bold">Log In</h1>
+          <label for="input"> E-mail</label>
+          <input id="userEmail" class="border border-indigo-600 rounded px-2 my-2  w-full" type="email"
+            placeholder="E-Mail address *">
+          <label for="password"> Pasword</label>
+          <input id="userPassword" class="border border-indigo-600 rounded px-2 my-2 w-full" t type="password"
+            placeholder="password *">
+          <button id="logInBtn" class="bg-blue-500 hover:bg-blue-400 text-white font-bold w-full py-1 px-2 my-2 rounded">Get Started</button>
 
         </form>
 
     </div>
   </div>
 
-  
-  <div class="max-w-lg mx-auto flex p-6 bg-gray-600 rounded-lg shadow-xl my-2 planInput">
+  <div class="addPlan ">
+
+
+  <div class="max-w-lg mx-auto flex p-6 bg-gray-600 rounded-lg shadow-xl my-2 planInput ">
     <div class="ml-6 pt-1">
       <form id="planSubmit">
         <label for="input"> City Name </label>
@@ -106,9 +110,9 @@
 
     </div>
   </div>
+  </div>
 
-
-  <div id="planContainer" class=" flex-1 bg-gray-600  rounded-md m-1 p-1 justify-around ">
+  <div id="planContainer " class=" hidden flex-1 bg-gray-600  rounded-md m-1 p-1 justify-around ">
     <!-- add plans here -->
   </div>
 
@@ -122,7 +126,7 @@
 
   </div>
 
-  <div id="GoogleMap" class=" h-screen p-6 right w-1/4 hidden">
+  <div id="GoogleMap" class=" h-screen p-6 right w-1/4 ">
     <h1>My google Map</h1>
   </div>
 
