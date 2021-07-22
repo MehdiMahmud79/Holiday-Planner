@@ -12,9 +12,89 @@ var userPassword;
 var markers=[];
 var cityList=[];
 
+var userIndex;
+var users = [
+            { 
+            userName: null,
+            userPassword: null,
+            userCities: [
+              { 
+                cityName: null,
+                cityDate: null,
+                cityPlan: null,
+              }
+            ],
+            }
+];
+
+var userObj = { 
+  userName: null,
+  userPassword: null,
+  userCities: [
+    { 
+      cityName: null,
+      cityDate: null,
+      cityPlan: null,
+    }
+  ],
+
+};
+
 var SignUpLoginSwitch = $("#SignUpLoginSwitch");
 
 
+
+const googleAPIKey = "AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE";
+
+const apiKey = "65b50ac0fd144e1fbd69be8c79bf2491";
+
+var weather = {};
+weather.temperature = {
+  unit: "celsius",
+  temp: 0,
+};
+weather.lat = 52.489471;
+weather.lng = -1.898575;
+
+var LOCAL_STORAGE_KEY = "savedUsers";
+
+ users = getPreviousUsers();
+
+function getPreviousUsers() {
+  savedUsers = localStorage.getItem(LOCAL_STORAGE_KEY);
+  
+  console.log("local Data", savedUsers);
+
+  if (savedUsers) {
+
+    // $("#register").text("Login");
+    // $("#LoginForm").removeClass("hidden");
+
+    //  we have to hide everything here
+    return JSON.parse(savedUsers);
+  } else {
+    // $("#LoginForm h1").text("SignUp");
+    // $("#register").text("SignUp");
+    // $("#LoginForm").removeClass("hidden");
+
+
+    //  we have to hide everything here
+    return [
+      { 
+        userName: null,
+        userPassword: null,
+        userCities: [
+          { 
+            cityName: null,
+            cityDate: null,
+            cityPlan: null,
+          }
+        ],
+      
+      }
+    ];
+  }
+}
 
 function createModal(message){
   var modalBox = $("<div></div>");
@@ -35,18 +115,6 @@ function createModal(message){
 }
 
 
-var userObj = { 
-  userName: null,
-  userPassword: null,
-  userCities: [
-    { 
-      cityName: null,
-      cityDate: null,
-      cityPlan: null,
-    }
-  ],
-
-};
 
 $("#Sign_Up_Button").on("click", function(){
   // event.preventDefault();
@@ -80,19 +148,12 @@ $("#signUpBtn").on("click", function(event){
     user.userPlans = [];
     console.log("register/signUpBtn a user");
   
-  
-  
     userObj.userName = $("#userName").val().trim();
-    console.log(userObj.userName);
 
     var repeatedPassword = $("#userPasswordRepeat").val();
-    console.log(repeatedPassword);
-
     userObj.userEmail = $("#userEmailSignUp").val().trim();
-    console.log(userObj.userEmail);
 
     userObj.userPassword = $("#userPasswordSignUp").val();
-    console.log(userObj.userPassword);
  
     if (userObj.userName =="" ){
       createModal("inpur the User Name and try again !");
@@ -108,105 +169,83 @@ $("#signUpBtn").on("click", function(event){
       createModal("inpur the password and try again !");
       return;
     }
-  
-  
-  if(users){
+  test=false;
+    if(users){
       for (var i in users) {
         console.log("i", i);
-        if (userObj.userEmail === users[i].userEmail && userObj.userPassword === users[i].userPassword) {
-            console.log(" The user exists")
-            userIndex=i;
-            loadPlans(userIndex);
+        if (userObj.userEmail === users[i].userEmail) {
+            console.log(" The user exists");
+            test=true;
             }
-            else{
-              createModal("User name/ Password incorrect!");
-            }
-          user.userPlans = users[i].userPlans;
-          $("#register").text("Login");
+        }
+
+        if(test){
+      createModal("the user Email already registered. Please Log in or try a different Email!");
+          
+        }
+        else{
+          users.push(userObj);
+          userIndex=users.length-1;
+          loadUser(userIndex);
         }
       }
     
-    // user.userEmail=encrypte(userEmail)
-    // user.userPassword=encrypte(userPassword)
-    user.userEmail = userEmail;
-    user.userPassword = userPassword;
-  
-    $("#LoginForm").addClass("hidden");
-    $("#userName").text(`${userEmail} plans: `);
-
-
 } )
 
+$("#logInBtn").on("click", function(event){
+    event.preventDefault();
 
-var users=[];
-
-
-
-// ( 
+    user = {};
+    user.userPlans = [];
+    console.log("register/signUpBtn a user");
   
-//   SignUpLoginSwitch.on("click", function(){
-//   // event.preventDefault();
-//   if (SignUpLoginSwitch.attr("checked")){
-//     console.log("button checked");
 
-//     $("#loginBtn2").attr("id","register");
-//     $("#register").text("sign up");
-    
+    var userEmail = $("#userEmailLogIn").val().trim();
 
+    var userPassword = $("#userPasswordLogIn").val();
+ 
 
-//     SignUpLoginSwitch.attr("checked", false);
-//   } else {
-//     console.log("button not checked");
+    if (userEmail == "" ){
+      createModal("input your ermail to Log In and try again!");
+      return;
+    }
 
+    if (userPassword =="" ){
+      createModal("inpur the password and try again !");
+      return;
+    }
 
-   
-//     $("#register").attr("id","loginBtn2");
-//     $("#loginBtn2").text("log in");
+  test=false;
+    if(users){
+      for (var i in users) {
+        console.log("i", i);
+        if (userEmail === users[i].userEmail) {
 
-//     SignUpLoginSwitch.attr("checked", true);
-//   }
-// })
+            console.log(" The user exists");
+            test=true;
+            unserIndex=i;
+        }
+      }
+        if(test){
 
-// )
-
-
-var userIndex;
-const googleAPIKey = "AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE";
-
-const apiKey = "65b50ac0fd144e1fbd69be8c79bf2491";
-
-var weather = {};
-weather.temperature = {
-  unit: "celsius",
-  temp: 0,
-};
-weather.lat = 52.489471;
-weather.lng = -1.898575;
-var LOCAL_STORAGE_KEY = "savedUsers";
-
- users = getPreviousUsers();
-
-function getPreviousUsers() {
-  savedUsers = localStorage.getItem(LOCAL_STORAGE_KEY);
-  
-  console.log("local Data", savedUsers);
-  if (savedUsers) {
-
-    $("#register").text("Login");
-    $("#LoginForm").removeClass("hidden");
-
-    //  we have to hide everything here
-    return JSON.parse(savedUsers);
-  } else {
-    // $("#LoginForm h1").text("SignUp");
-    $("#register").text("SignUp");
-    $("#LoginForm").removeClass("hidden");
+          if(userPassword===users[unserIndex].userpassword){
+            loadUser(unserIndex);
+            return;
+          } else{
+            createModal("your email/Password is wrong. Please try again!");
+            return;
+          };
+        }
+        else{
+          
+      createModal("the user Email is not registered. Please Try again!");
+          
+        }
+      }
+    }
+    )
 
 
-    //  we have to hide everything here
-    return [];
-  }
-}
 
 $(function () {
   $("#datepicker").datepicker({ dateFormat: "dd-mm-yy" });
