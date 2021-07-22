@@ -14,6 +14,31 @@ var cityList=[];
 
 var SignUpLoginSwitch = $("#SignUpLoginSwitch");
 
+
+$("#Sign_Up_Button").on("click", function(event){
+  // event.preventDefault();
+
+  $("#Sign_Up_Button").removeClass("bg-gray-500 hover:bg-gray-400 ");
+  $("#Log_In_Button").removeClass("bg-green-500 hover:bg-green-400 ");
+  $("#Sign_Up_Button").addClass("bg-green-500 hover:bg-green-400");
+  $("#Log_In_Button").addClass("bg-gray-500 hover:bg-gray-400");
+  $(".logInForm").addClass("hidden");
+  $(".signUpForm").removeClass("hidden");
+
+});
+
+$("#Log_In_Button").on("click", function(){
+  $("#Log_In_Button").removeClass("bg-gray-500 hover:bg-gray-400");
+  $("#Sign_Up_Button").removeClass("bg-green-500 hover:bg-green-400");    
+  $("#Log_In_Button").addClass("bg-green-500 hover:bg-green-400");
+  $("#Sign_Up_Button").addClass("bg-gray-500 hover:bg-gray-400");  
+  $(".signUpForm").addClass("hidden");
+  $(".logInForm").removeClass("hidden");
+});
+
+
+
+
 var users=[];
 
 // var userObj = { 
