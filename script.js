@@ -11,7 +11,7 @@ var userPassword;
 var markers=[];
 var cityList=[];
 
-var SignUpLoginSwitch = $("#SignUpLoginSwitch");
+// var SignUpLoginSwitch = $("#SignUpLoginSwitch");
 
 var users=[];
 
@@ -28,32 +28,32 @@ var users=[];
 
 // };
 
-( 
+// ( 
   
-  SignUpLoginSwitch.on("click", function(){
-  // event.preventDefault();
-  if (SignUpLoginSwitch.attr("checked")){
-    console.log("button checked");
+//   SignUpLoginSwitch.on("click", function(){
+//   // event.preventDefault();
+//   if (SignUpLoginSwitch.attr("checked")){
+//     console.log("button checked");
 
-    $("#loginBtn2").attr("id","register");
-    $("#register").text("sign up");
+//     $("#loginBtn2").attr("id","register");
+//     $("#register").text("sign up");
     
 
 
-    SignUpLoginSwitch.attr("checked", false);
-  } else {
-    console.log("button not checked");
+//     SignUpLoginSwitch.attr("checked", false);
+//   } else {
+//     console.log("button not checked");
 
 
    
-    $("#register").attr("id","loginBtn2");
-    $("#loginBtn2").text("log in");
+//     $("#register").attr("id","loginBtn2");
+//     $("#loginBtn2").text("log in");
 
-    SignUpLoginSwitch.attr("checked", true);
-  }
-})
+//     SignUpLoginSwitch.attr("checked", true);
+//   }
+// })
 
-)
+// )
 
 
 var userIndex;
@@ -263,7 +263,8 @@ function getWeather(cityName) {
 }
 
 
-// var userCities=users[index].userCities;
+var userCities = users[userIndex].userCities;
+
 function addPlan(event) {
   event.preventDefault();
 
