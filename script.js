@@ -15,6 +15,39 @@ var cityList=[];
 var SignUpLoginSwitch = $("#SignUpLoginSwitch");
 
 
+
+function createModal(message){
+  var modalBox = $("<div></div>");
+  modalBox.dialog({
+    modal: true,
+    title: "Error!",
+    open: function () {
+      var markup = message;
+      $(this).html(markup);
+    },
+    buttons: {
+      Ok: function () {
+        $(this).dialog("close");
+
+      }
+    }
+  })
+}
+
+
+var userObj = { 
+  userName: null,
+  userPassword: null,
+  userCities: [
+    { 
+      cityName: null,
+      cityDate: null,
+      cityPlan: null,
+    }
+  ],
+
+};
+
 $("#Sign_Up_Button").on("click", function(event){
   // event.preventDefault();
 
@@ -36,50 +69,103 @@ $("#Log_In_Button").on("click", function(){
   $(".logInForm").removeClass("hidden");
 });
 
+$("#signUpBtn").on("submit", function(event){
+  event.preventDefault();
 
+    user = {};
+    user.userPlans = [];
+    console.log("register user");
+  
+  
+  
+    userObj.userName = $("#userName").val().trim();
+    userObj.userEmail = $("#userEmail").val().trim();
+    userObj.userPassword = $("#userPassword").val();
+    var repeatedPassword = $("#userPasswordRepeat").val();
+
+
+    
+
+    if (userObj.userPassword !== repeatedPassword ){
+      createModal("Passwords do not match, Please try again!");
+      return;
+
+    }
+  
+    $("#register").text("SignUp");
+  
+  if(users){
+      for (var i in users) {
+        console.log("i", i);
+        if (userObj.userEmail === users[i].userEmail && userObj.userPassword === users[i].userPassword) {
+            console.log(" The user exists")
+            userIndex=i;
+            loadPlans(userIndex);
+            }
+            else{
+              var modalBox = $("<div></div>");
+              modalBox.dialog({
+                modal: true,
+                title: "Error!",
+                open: function () {
+                  var markup = "User name/ Password incorrect!";
+                  $(this).html(markup);
+                },
+                buttons: {
+                  Ok: function () {
+                    $(this).dialog("close");
+                  },
+                },
+              });     
+              return;
+            }
+          user.userPlans = users[i].userPlans;
+          $("#register").text("Login");
+        }
+      }
+    
+    // user.userEmail=encrypte(userEmail)
+    // user.userPassword=encrypte(userPassword)
+    user.userEmail = userEmail;
+    user.userPassword = userPassword;
+  
+    $("#LoginForm").addClass("hidden");
+    $("#userName").text(`${userEmail} plans: `);
+
+
+} )
 
 
 var users=[];
 
-// var userObj = { 
-//   userName: null,
-//   userPassword: null,
-//   userCities: [
-//     { 
-//       cityName: null,
-//       cityDate: null,
-//       cityPlan: null,
-//     }
-//   ],
 
-// };
 
-( 
+// ( 
   
-  SignUpLoginSwitch.on("click", function(){
-  // event.preventDefault();
-  if (SignUpLoginSwitch.attr("checked")){
-    console.log("button checked");
+//   SignUpLoginSwitch.on("click", function(){
+//   // event.preventDefault();
+//   if (SignUpLoginSwitch.attr("checked")){
+//     console.log("button checked");
 
-    $("#loginBtn2").attr("id","register");
-    $("#register").text("sign up");
+//     $("#loginBtn2").attr("id","register");
+//     $("#register").text("sign up");
     
 
 
-    SignUpLoginSwitch.attr("checked", false);
-  } else {
-    console.log("button not checked");
+//     SignUpLoginSwitch.attr("checked", false);
+//   } else {
+//     console.log("button not checked");
 
 
    
-    $("#register").attr("id","loginBtn2");
-    $("#loginBtn2").text("log in");
+//     $("#register").attr("id","loginBtn2");
+//     $("#loginBtn2").text("log in");
 
-    SignUpLoginSwitch.attr("checked", true);
-  }
-})
+//     SignUpLoginSwitch.attr("checked", true);
+//   }
+// })
 
-)
+// )
 
 
 var userIndex;
