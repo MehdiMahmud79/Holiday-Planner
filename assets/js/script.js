@@ -11,36 +11,17 @@ var index = 0;
 var userPassword;
 var markers=[];
 var cityList=[];
-
+var unserIndex=0;
 var userIndex;
-var users = [
-            { 
-            userName: null,
-            userPassword: null,
-            userCities: [
-              { 
-                cityName: null,
-                cityDate: null,
-                cityPlan: null,
-              }
-            ],
-            }
-];
+var users={}
 
-var userObj = { 
-  userName: null,
-  userPassword: null,
-  userCities: [
-    { 
-      cityName: null,
-      cityDate: null,
-      cityPlan: null,
-    }
-  ],
+var userObj = {}
+userObj.userCities=[];
+var userPlans={};
 
-};
 
 var SignUpLoginSwitch = $("#SignUpLoginSwitch");
+var planContainer = $(".planContainer");
 
 
 
@@ -58,7 +39,10 @@ weather.lng = -1.898575;
 
 var LOCAL_STORAGE_KEY = "savedUsers";
 
- users = getPreviousUsers();
+// save plans to the local storage
+function setPreviousUsers() {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(users));
+}
 
 function getPreviousUsers() {
   savedUsers = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -67,32 +51,9 @@ function getPreviousUsers() {
 
   if (savedUsers) {
 
-    // $("#register").text("Login");
-    // $("#LoginForm").removeClass("hidden");
-
-    //  we have to hide everything here
     return JSON.parse(savedUsers);
   } else {
-    // $("#LoginForm h1").text("SignUp");
-    // $("#register").text("SignUp");
-    // $("#LoginForm").removeClass("hidden");
-
-
-    //  we have to hide everything here
-    return [
-      { 
-        userName: null,
-        userPassword: null,
-        userCities: [
-          { 
-            cityName: null,
-            cityDate: null,
-            cityPlan: null,
-          }
-        ],
-      
-      }
-    ];
+       return [];
   }
 }
 
@@ -115,13 +76,13 @@ function createModal(message){
 }
 
 
-$("#menuLoginBtn").on("click",function(){
+($("#menuLoginBtn").on("click",function(){
 
   $(".LoginContainer").removeClass("hidden");
-  $(".addPlan").addclass("hidden");
-  $(".GoogleMap").addclass("hidden");
+  $(".addPlan").addClass("hidden");
+  $(".GoogleMap").addClass("hidden");
 
-})
+}))
 
 $("#Sign_Up_Button").on("click", function(){
   // event.preventDefault();
@@ -150,17 +111,16 @@ $("#Log_In_Button").on("click", function(){
 
 $("#signUpBtn").on("click", function(event){
   event.preventDefault();
+  users = getPreviousUsers();
+console.log(users)
 
-    user = {};
-    user.userPlans = [];
-    console.log("register/signUpBtn a user");
-  
     userObj.userName = $("#userName").val().trim();
 
     var repeatedPassword = $("#userPasswordRepeat").val();
     userObj.userEmail = $("#userEmailSignUp").val().trim();
 
     userObj.userPassword = $("#userPasswordSignUp").val();
+    userObj.userCities=[];
  
     if (userObj.userName =="" ){
       createModal("inpur the User Name and try again !");
@@ -172,11 +132,17 @@ $("#signUpBtn").on("click", function(event){
       return;
     }
 
+    if (userObj.userPassword !=repeatedPassword ){
+      createModal("passwords dont match!");
+      return;
+    }
+    
     if (userObj.userPassword =="" || repeatedPassword ===""){
       createModal("input the password and try again !");
       return;
     }
   test=false;
+
     if(users){
       for (var i in users) {
         console.log("i", i);
@@ -188,12 +154,18 @@ $("#signUpBtn").on("click", function(event){
 
         if(test){
       createModal("the user Email already registered. Please Log in or try a different Email!");
-          
+          return
         }
         else{
+          // register the current user
           users.push(userObj);
           userIndex=users.length-1;
-          loadUser(userIndex);
+          setPreviousUsers()
+          console.log("registered user is", userObj)
+          $(".LoginContainer").addClass("hidden");
+          $(".addPlan").removeClass("hidden");
+         
+
         }
       }
     
@@ -201,42 +173,53 @@ $("#signUpBtn").on("click", function(event){
 
 $("#logInBtn").on("click", function(event){
     event.preventDefault();
+    users = getPreviousUsers();
 
-    user = {};
-    user.userPlans = [];
-    console.log("register/signUpBtn a user");
-  
+    userObj.userEmail= $("#userEmailLogIn").val().trim();
 
-    var userEmail = $("#userEmailLogIn").val().trim();
-
-    var userPassword = $("#userPasswordLogIn").val();
+    userObj.userPassword = $("#userPasswordLogIn").val();
  
 
-    if (userEmail == "" ){
+    if (userObj.userEmail == "" ){
       createModal("input your ermail to Log In and try again!");
       return;
     }
 
-    if (userPassword =="" ){
+    if (userObj.userPassword =="" ){
       createModal("inpur the password and try again !");
       return;
-    }
+    } 
+    
 
   test=false;
     if(users){
-      for (var i in users) {
-        console.log("i", i);
-        if (userEmail === users[i].userEmail) {
+      for (var i=0;i<users.length;i++) {
+        if (userObj.userEmail === users[i].userEmail) {
 
             console.log(" The user exists");
             test=true;
             unserIndex=i;
         }
       }
+             console.log("user index is", unserIndex);
+     
         if(test){
 
-          if(userPassword===users[unserIndex].userpassword){
-            loadUser(unserIndex);
+          if(userObj.userPassword == users[unserIndex].userPassword){
+            
+            userObj.userCities=users[unserIndex].userCities;
+            userObj.userName=users[unserIndex].userName;
+
+            $(".LoginContainer").addClass("hidden");
+            $(".addPlan").removeClass("hidden");
+            $("#userNameHeader").text(userObj.userName)
+            $(".userHeader").removeClass("hidden");
+            $(".userHeader").addClass("flex");
+            
+            for (var k=0;k<userObj.userCities;k++){
+              getWeather(userObj.userCities[k].cityName);
+            }
+
             return;
           } else{
             createModal("your email/Password is wrong. Please try again!");
@@ -245,12 +228,15 @@ $("#logInBtn").on("click", function(event){
         }
         else{
           
-      createModal("the user Email is not registered. Please Try again!");
+      createModal("the user Email is not registered. Please Try again or Signup!");
           
         }
       }
     }
     )
+
+
+
 
 
 
@@ -329,29 +315,6 @@ if(users){
 }
 
 
-function loadPlans(userIndex) {
-
-     var planLength= users[userIndex].userCities.length
-    for (var i=0; i<planLength;i++){
-
-      weather = {};
-      weather.temperature = {
-        unit: "celsius",
-        temp: 0,
-      };
-
-      getWeather(users[userIndex].userCities[i].cityName);
-
-      index++;
-      cityList.push(index);
-    }
-
-}
-
-// save plans to the local storage
-function setPreviousUsers() {
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(users));
-}
 
 function encrypte(a) {
   var a = a.split("");
@@ -426,10 +389,6 @@ function getWeather(cityName) {
 // var userCities=users[index].userCities;
 function addPlan(event) {
   event.preventDefault();
-
-  userPlanObj={};
-  console.log("adding a plan and save it locally");
-  
   weather = {};
   weather.temperature = {
     unit: "celsius",
@@ -439,62 +398,34 @@ function addPlan(event) {
   cityDate = $("#datepicker").val();
   cityPlan = $("#cityPlan").val();
 
-  userPlanObj.cityName=cityName;
-  userPlanObj.cityDate=cityDate;
-  userPlanObj.cityPlan=cityPlan;
-  
-  users[index].userCities.push(userPlanObj);
-  // userObj.userCities;
-  users[index].push(userObj)
-  // var user={};
-  user.userPlans = [];
-
-  user.userEmail = userEmail;
-  user.userPassword = userPassword;
-  if (cityDate == "") {
-    var modalBox = $("<div></div>");
-    modalBox.dialog({
-      modal: true,
-      title: "Error!",
-      open: function () {
-        var markup = "Please enter a Date";
-        $(this).html(markup);
-      },
-      buttons: {
-        Ok: function () {
-          $(this).dialog("close");
-        },
-      },
-    });
-
+  if (cityName == "") {
+    createModal("Please input the city Name!");
     return;
-  } else if (cityName == "") {
-    var modalBox = $("<div></div>");
-    modalBox.dialog({
-      modal: true,
-      title: "Error!",
-      open: function () {
-        var markup = "Please enter a City";
-        $(this).html(markup);
-      },
-      buttons: {
-        Ok: function () {
-          $(this).dialog("close");
-        },
-      },
-    });
-  } else {
-    getWeather(cityName);
+  }
+    if (cityDate == "") {
+    createModal("Please input the date!");
+    return;
+  }
+      if (cityPlan == "") {
+    createModal("Please input the day plan!");
+    return;
   }
 
-  // setPlans(index)
+  userPlans.cityName=cityName;
+  userPlans.cityDate=cityDate;
+  userPlans.cityPlan=cityPlan;
+  userObj.userCities.push(userPlans)
+
+  users[unserIndex].userCities=userObj.userCities;
+  setPreviousUsers()
+  getWeather(cityName);
+
   index++;
-  cityList.push(index);
+  cityList.push(cityName);
 }
 
 $("#planSubmit").on("submit", addPlan);
 
-var planContainer = $("#planContainer");
 
 function creatPlanList() {
   var w40 = $(`<div class="block w-40">`);
@@ -540,6 +471,7 @@ function creatPlanList() {
   mb2.append(wfull);
 
   planContainer.append(mb2);
+  planContainer.removeClass("hidden");
   $(".delete-plan-btn").on("click", handleRemoveItem);
 }
 
@@ -552,6 +484,7 @@ function handleRemoveItem(event) {
 
   var k=parseInt(btnClicked.parent().parent().attr("id"));
   console.log("k",k)
+
   for (var i=0;i<cityList.length;i++){
 
     if(cityList[i]===k){
@@ -561,5 +494,9 @@ function handleRemoveItem(event) {
    console.log("cityList", cityList);
 
    btnClicked.parent().parent().remove(); 
+   var usercities=userObj.userCities;
+   for (var j=0;j<usercities.length;j++){
+     
+   }
 }
 

@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="tailwind.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./assets/css/tailwind.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -23,16 +23,6 @@
 
     <div class="w-full block flex-grow sm:flex sm:items-center sm:w-auto">
       <div class="text-lg sm:flex-grow">
-        <!-- <a href="./G-map.html" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-500 hover:bg-white mt-4 md:mt-0">
-          map
-        </a> -->
-        
-        <!-- <a href="#" class="block mt-4 sm:inline-block sm:mt-0 text-teal-200 text-blue-200 hover:text-blue mr-4">
-          about
-        </a>
-        <a href="#" class="block mt-4 sm:inline-block sm:mt-0 text-teal-200 text-blue-200 hover:text-blue">
-          places to visit
-        </a> -->
       </div>
       <div>
         <a href="#" id="menuLoginBtn"
@@ -41,16 +31,21 @@
           <a href="./G-map.html" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-500 hover:bg-white mt-4 md:mt-0">
             map
           </a>
+        
         </div>
     </div>
 
   </nav>
-  <div>
-    <h1 id="userNameHeader" class="font-bold text-3xl bg-red-800 text-yellow-200 py-4 "></h1>
+
+  <div class="userHeader hidden justify-between bg-red-800 p-4 ">
+    <h1 id="userNameHeader" class="font-bold text-3xl  text-yellow-200  ml-2">User</h1>
+        <a href="#" id="logOutBtn"
+          class="inline-block text-sm px-4 py-2 ml-2  border rounded text-white border-white  hover:border-transparent hover:text-blue-500 hover:bg-white mt-4 md:mt-0">
+          Logot</a>
   </div>
 
   <!-- Login signUp card -->
-  <div id="LoginContainer" class=" max-w-sm mx-auto p-6 bg-gray-300 my-5 rounded-lg shadow-xl">
+  <div  class="LoginContainer max-w-sm mx-auto p-6 bg-gray-300 my-5 rounded-lg shadow-xl">
     <div class="flex items-center justify-center w-full mb-4">
             <button id="Sign_Up_Button" class="bg-green-500 hover:bg-green-400 text-white font-bold w-full py-1 px-2 my-2 ">SignUp</button>  
             <button id = "Log_In_Button" class="bg-gray-500 hover:bg-gray-400 text-white font-bold w-full py-1 px-2 my-2 ">Log in</button>  
@@ -112,7 +107,7 @@
   </div>
   </div>
 
-  <div id="planContainer " class=" hidden flex-1 bg-gray-600  rounded-md m-1 p-1 justify-around ">
+  <div  class="planContainer hidden flex-1 bg-gray-600  rounded-md m-1 p-1 justify-around ">
     <!-- add plans here -->
   </div>
 
@@ -148,8 +143,8 @@
 
 
   <!-- <script src="./assets/Js/DOM.js"></script> -->
-  <script src="script.js"></script>
-    <script src="googleinit.js"></script>
+  <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/googleinit.js"></script>
 
   <script async
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHRetLZb66zqKQV5qB7uAf94HYGIVRrLE&callback=initMap&libraries=places&v=weekly">
