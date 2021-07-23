@@ -115,6 +115,13 @@ function createModal(message){
 }
 
 
+$("#menuLoginBtn").on("click",function(){
+
+  $(".LoginContainer").removeClass("hidden");
+  $(".addPlan").addclass("hidden");
+  $(".GoogleMap").addclass("hidden");
+
+})
 
 $("#Sign_Up_Button").on("click", function(){
   // event.preventDefault();
@@ -161,12 +168,12 @@ $("#signUpBtn").on("click", function(event){
     }
 
     if (userObj.userEmail == "" ){
-      createModal("input your ermail, Please try again!");
+      createModal("input your E-mail and try again!");
       return;
     }
 
     if (userObj.userPassword =="" || repeatedPassword ===""){
-      createModal("inpur the password and try again !");
+      createModal("input the password and try again !");
       return;
     }
   test=false;
