@@ -202,6 +202,16 @@ console.log(users)
           console.log("registered user is", userObj)
           $(".LoginContainer").addClass("hidden");
           $(".addPlan").removeClass("hidden");
+          $("#userNameHeader").text(userObj.userName)
+          $(".userHeader").removeClass("hidden");
+          $(".userHeader").addClass("flex");
+
+          $("#Log_In_Button").removeClass("bg-gray-500 hover:bg-gray-400");
+          $("#Sign_Up_Button").removeClass("bg-green-500 hover:bg-green-400");    
+          $("#Log_In_Button").addClass("bg-green-500 hover:bg-green-400");
+          $("#Sign_Up_Button").addClass("bg-gray-500 hover:bg-gray-400");  
+          $(".signUpForm").addClass("hidden");
+          $(".logInForm").removeClass("hidden");
          
 
         }
@@ -253,6 +263,14 @@ $("#logInBtn").on("click", function(event){
             $("#userNameHeader").text(userObj.userName)
             $(".userHeader").removeClass("hidden");
             $(".userHeader").addClass("flex");
+
+            $("#Log_In_Button").removeClass("bg-gray-500 hover:bg-gray-400");
+            $("#Sign_Up_Button").removeClass("bg-green-500 hover:bg-green-400");    
+            $("#Log_In_Button").addClass("bg-green-500 hover:bg-green-400");
+            $("#Sign_Up_Button").addClass("bg-gray-500 hover:bg-gray-400");  
+            $(".signUpForm").addClass("hidden");
+            $(".logInForm").removeClass("hidden");
+
             
             for (var k=0;k<userObj.userCities;k++){
               getWeather(userObj.userCities[k].cityName);
