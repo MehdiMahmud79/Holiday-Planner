@@ -41,17 +41,47 @@ var LOCAL_STORAGE_KEY = "savedUsers";
 
 // save plans to the local storage
 function setPreviousUsers() {
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(users));
+
+   var savedUsers=[];
+   for(var i=0;i<users.length;i++){
+    var user=users[i];
+     user.userName=encrypt(user.userName);
+     user.userPassword=encrypt(user.userPassword);
+     user.userEmail=encrypt(user.userEmail);
+
+    //  for (var j=0; j<user.userCities;j++){
+
+    //  }
+
+    savedUsers.push(user);
+
+   }
+
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedUsers));
 }
 
 function getPreviousUsers() {
   savedUsers = localStorage.getItem(LOCAL_STORAGE_KEY);
-  
+  savedUsers=JSON.parse(savedUsers);
   console.log("local Data", savedUsers);
 
   if (savedUsers) {
-
-    return JSON.parse(savedUsers);
+    var saveduser=[];
+    for(var i=0;i<savedUsers.length;i++){
+     var user=savedUsers[i];
+      user.userName=decrypt(user.userName);
+      user.userPassword=decrypt(user.userPassword);
+      user.userEmail=decrypt(user.userEmail);
+ 
+     //  for (var j=0; j<user.userCities;j++){
+ 
+     //  }
+ 
+     saveduser.push(user);
+ 
+    }
+return saveduser;
+    // return JSON.parse(saveduser);
   } else {
        return [];
   }
@@ -75,14 +105,22 @@ function createModal(message){
   })
 }
 
+$("#logOutBtn").on("click",login)
 
-($("#menuLoginBtn").on("click",function(){
+$("#menuLoginBtn").on("click",login)
+
+function login(){
 
   $(".LoginContainer").removeClass("hidden");
   $(".addPlan").addClass("hidden");
   $(".GoogleMap").addClass("hidden");
+  $(".planContainer").addClass("hidden");
+  $("#GoogleMap").addClass("hidden");
+  $(".userHeader").addClass("hidden");
+  $(".userHeader").removeClass("flex");
 
-}))
+
+}
 
 $("#Sign_Up_Button").on("click", function(){
   // event.preventDefault();
@@ -316,7 +354,7 @@ if(users){
 
 
 
-function encrypte(a) {
+function encrypt(a) {
   var a = a.split("");
   var n = a.length;
   b = [];
@@ -417,6 +455,7 @@ function addPlan(event) {
   userObj.userCities.push(userPlans)
 
   users[unserIndex].userCities=userObj.userCities;
+
   setPreviousUsers()
   getWeather(cityName);
 
