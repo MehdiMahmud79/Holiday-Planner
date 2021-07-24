@@ -96,7 +96,10 @@ function createModal(message){
 
 
 //  add eventlistner to the login and logout buttons
-$("#logOutBtn").on("click",login)
+$("#logOutBtn").on("click",function(){
+  login();
+  Sign_Up_Button();
+})
 $("#menuLoginBtn").on("click",login)
 
 function login(){
@@ -114,7 +117,9 @@ function login(){
 
 // eventListner to the signup button in the LoginContainer  
 
-$("#Sign_Up_Button").on("click", function(){
+$("#Sign_Up_Button").on("click", Sign_Up_Button);
+
+ function Sign_Up_Button(){
 
       $("#Sign_Up_Button").removeClass("bg-gray-500 hover:bg-gray-400 ");
       $("#Log_In_Button").removeClass("bg-green-500 hover:bg-green-400 ");
@@ -123,7 +128,7 @@ $("#Sign_Up_Button").on("click", function(){
       $(".logInForm").addClass("hidden");
       $(".signUpForm").removeClass("hidden");
 
-});
+};
 
 // eventListner to the log in button in the LoginContainer 
 
