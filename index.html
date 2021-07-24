@@ -6,16 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="./assets/css/tailwind.css">
-  <link rel="stylesheet" href="./assets/css/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- <link rel="stylesheet" href="/resources/demos/style.css" -->
-</head>
+  <link rel="stylesheet" href="./assets/css/tailwind.css">
+  <link rel="stylesheet" href="./assets/css/style.css"></head>
 
 <body>
+  <!-- navbar -->
   <nav class="flex items-center justify-between flex-wrap bg-gray-800 p-6">
     <div class="flex items-center flex-shrink-0 text-white mr-6">
       <span class="font-bold text-3xl">Holiday Planner</span>
@@ -37,6 +36,7 @@
 
   </nav>
 
+<!-- logout button for the logged in user -->
   <div class="userHeader hidden justify-between bg-red-800 p-4 ">
     <h1 id="userNameHeader" class="font-bold text-3xl  text-yellow-200  ml-2">User</h1>
         <a href="#" id="logOutBtn"
@@ -52,7 +52,7 @@
          </div>
     <div class="ml-6 pt-1 ">
 
-
+      <!-- SignUp form -->
         <form class="signUpForm " action=" submit">
          
           <h1 class="text-center text-xl text-blue-600 font-bold">Sign Up</h1>
@@ -68,9 +68,9 @@
           <input id="userPasswordRepeat" class="border border-indigo-600 rounded px-2 my-2  w-full" t type="password"
               placeholder="Repeat password *">
           <button id="signUpBtn" class="bg-blue-500 hover:bg-blue-400 text-white font-bold w-full py-1 px-2 my-2 rounded">Get Started</button>
-
         </form>
 
+      <!-- Log in form -->
         <form class="logInForm hidden" action=" submit">
           <h1 class="text-center text-xl text-blue-600 font-bold">Log In</h1>
           <label for="input"> E-mail</label>
@@ -86,9 +86,8 @@
     </div>
   </div>
 
+<!--  add plan form to inpur the city plan -->
   <div class="addPlan hidden">
-
-
   <div class="max-w-lg mx-auto flex p-6 bg-gray-600 rounded-lg shadow-xl my-2 planInput ">
     <div class="ml-6 pt-1">
       <form id="planSubmit">
@@ -107,12 +106,13 @@
   </div>
   </div>
 
+  <!-- city plan will be created in the js DOM -->
   <div  class="planContainer hidden flex-1 bg-gray-600  rounded-md m-1 p-1 justify-around ">
     <!-- add plans here -->
   </div>
 
 
-
+<!-- google Map container -->
   <div id="GoogleMap" class="Googlemap h-screen p-6 right w-1/4 hidden">
     <h1>My google Map</h1>
   </div>
