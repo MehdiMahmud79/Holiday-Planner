@@ -12,6 +12,21 @@ This project is an application for a holiday planner which gives you the ability
 
 An application that will run in the browser and feature dynamically updated HTML and CSS powered by JQuery. Application features polished UI and is responsive, ensuring adaptation to multiple screen sizes.
 
+
+## User Story
+
+```
+AS a holiday go-er, I want an application to plan out my holiday and to view the weather of the a city and store 
+
+* WHEN The page loads, THEN customer is presented with a navigation bar with “LogIn/SignUp” and “Map” buttons
+* WHEN “LogIn/SignUp” button pressed, THEN Customer is presented with Sign up form.
+* WHEN Customer signs up using an email address, email and password, THEN a new user object is created and the customer is presented with a form to input the plan, which includes inputs for city name, date of visit and a description
+* WHEN the customer fills in the plan form, THEN a card for the name of city, date of visit, description and weather data for that city is created and displayed on page. 
+* WHEN the card is created, THEN a flag is added to the map at the location of the city with a description of the plan on that day
+* WHEN the page is reloaded, THEN I can press the tab on the “Sign Up” form to log in
+* WHEN I log in, THEN I am presented with my saved plans.
+* WHEN I delete a plan, THEN it is removed from the page and local storage
+```
 ## Mock-Up
 
 The following animation shows the web application's appearance and functionality:
@@ -21,7 +36,7 @@ The following animation shows the web application's appearance and functionality
 ## Third Party Assets:
 * [OpenWeather One Call API](https://openweathermap.org/api/one-call-api)
 * [GoogleMap API]
-* [Momement.js](https://momentjs.com/)
+* [Moment.js](https://momentjs.com/)
 * [Jquery](https://code.jquery.com/jquery-3.4.1.min.js)
 * [Font Awesome](https://fontawesome.com/)
 
@@ -33,6 +48,6 @@ The following animation shows the web application's appearance and functionality
 * [The URL of the GitHub repository](https://github.com/MehdiMahmud79/Holiday-Planner)
 
 - - -
-© 2021 Mehdi Mahmud & Kevin K.
+© 2021 Mehdi Mahmud & Kevin Ryner.
 
 
