@@ -15,8 +15,7 @@ An application that will run in the browser and feature dynamically updated HTML
 
 ## User Story
 
-```
-AS a holiday go-er, I want an application to plan out my holiday and to view the weather of the a city and store 
+AS a holiday go-er, I want an application to plan out my holiday and to view the weather of the a city and store these so that they can be accessed at aa later time. I also want the ability to create multiple accounts so that different people can save their plans
 
 * WHEN The page loads, THEN customer is presented with a navigation bar with “LogIn/SignUp” and “Map” buttons
 * WHEN “LogIn/SignUp” button pressed, THEN Customer is presented with Sign up form.
@@ -26,7 +25,8 @@ AS a holiday go-er, I want an application to plan out my holiday and to view the
 * WHEN the page is reloaded, THEN I can press the tab on the “Sign Up” form to log in
 * WHEN I log in, THEN I am presented with my saved plans.
 * WHEN I delete a plan, THEN it is removed from the page and local storage
-```
+* WHEN I save data to local storage, THEN It is encrypted using Caesar
+
 ## Mock-Up
 
 The following animation shows the web application's appearance and functionality:
