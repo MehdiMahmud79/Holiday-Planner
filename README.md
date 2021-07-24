@@ -19,7 +19,7 @@ AS a holiday go-er, I want an application to plan out my holiday and to view the
 
 * WHEN The page loads, THEN customer is presented with a navigation bar with “LogIn/SignUp” and “Map” buttons
 * WHEN “LogIn/SignUp” button pressed, THEN Customer is presented with Sign up form.
-* WHEN Customer signs up using an email address, email and password, THEN a new user object is created and the customer is presented with a form to input the plan, which includes inputs for city name, date of visit and a description
+* WHEN Customer signs up using an email address, email and password, THEN a new user object is created and the customer is presented with a form to input the plan, which includes inputs for city name, date of visit and a description, as well as a banner that sows username and log out button
 * WHEN the customer fills in the plan form, THEN a card for the name of city, date of visit, description and weather data for that city is created and displayed on page. 
 * WHEN the card is created, THEN a flag is added to the map at the location of the city with a description of the plan on that day
 * WHEN the page is reloaded, THEN I can press the tab on the “Sign Up” form to log in
@@ -31,11 +31,11 @@ AS a holiday go-er, I want an application to plan out my holiday and to view the
 
 The following animation shows the web application's appearance and functionality:
 
-![Simple Day Scheduler App".](./assets/screen.gif)
+![Simple Day Scheduler App.](./assets/screen.gif)
 
 ## Third Party Assets:
 * [OpenWeather One Call API](https://openweathermap.org/api/one-call-api)
-* [GoogleMap API]
+* [GoogleMap API](https://developers.google.com/maps)
 * [Moment.js](https://momentjs.com/)
 * [Jquery](https://code.jquery.com/jquery-3.4.1.min.js)
 * [Font Awesome](https://fontawesome.com/)
