@@ -101,7 +101,10 @@ $("#menuLoginBtn").on("click",login);
 
 function login(){
   $(".addPlan").addClass("hidden");
+  $("#GoogleMap").addClass("hidden")
   $(".LoginContainer").removeClass("hidden");
+  $(".planContainer").addClass("hidden");
+  $(".userHeader").addClass("hidden");
 
     Sign_Up_Button()
 }
