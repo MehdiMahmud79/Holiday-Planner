@@ -96,23 +96,14 @@ function createModal(message){
 
 
 //  add eventlistner to the login and logout buttons
-$("#logOutBtn").on("click",function(){
-  login();
-  Sign_Up_Button();
-})
-$("#menuLoginBtn").on("click",login)
+$("#logOutBtn").on("click",login);
+$("#menuLoginBtn").on("click",login);
 
 function login(){
+  $(".addPlan").addClass("hidden");
+  $(".LoginContainer").removeClass("hidden");
 
-    $(".LoginContainer").removeClass("hidden");
-    $(".addPlan").addClass("hidden");
-    $(".GoogleMap").addClass("hidden");
-    $(".planContainer").addClass("hidden");
-    $("#GoogleMap").addClass("hidden");
-    $(".userHeader").addClass("hidden");
-    $(".userHeader").removeClass("flex");
-      $(".logInForm").removeClass("hidden");
-
+    Sign_Up_Button()
 }
 
 // eventListner to the signup button in the LoginContainer  
@@ -120,7 +111,6 @@ function login(){
 $("#Sign_Up_Button").on("click", Sign_Up_Button);
 
  function Sign_Up_Button(){
-
       $("#Sign_Up_Button").removeClass("bg-gray-500 hover:bg-gray-400 ");
       $("#Log_In_Button").removeClass("bg-green-500 hover:bg-green-400 ");
       $("#Sign_Up_Button").addClass("bg-green-500 hover:bg-green-400");
@@ -133,6 +123,7 @@ $("#Sign_Up_Button").on("click", Sign_Up_Button);
 // eventListner to the log in button in the LoginContainer 
 
 $("#Log_In_Button").on("click", function(){
+      $(".LoginContainer").removeClass("hidden");
       $("#Log_In_Button").removeClass("bg-gray-500 hover:bg-gray-400");
       $("#Sign_Up_Button").removeClass("bg-green-500 hover:bg-green-400");    
       $("#Log_In_Button").addClass("bg-green-500 hover:bg-green-400");
@@ -207,13 +198,13 @@ $("#signUpBtn").on("click", function(event){
           $(".userHeader").removeClass("hidden");
           $(".userHeader").addClass("flex");
 
-          // $("#Log_In_Button").removeClass("bg-gray-500 hover:bg-gray-400");
-          // $("#Sign_Up_Button").removeClass("bg-green-500 hover:bg-green-400");    
-          // $("#Log_In_Button").addClass("bg-green-500 hover:bg-green-400");
-          // $("#Sign_Up_Button").addClass("bg-gray-500 hover:bg-gray-400");  
           $(".signUpForm").addClass("hidden");
           $(".logInForm").addClass("hidden");
-         
+          // empty the signup form
+          $("#userName").val("");
+          $("#userPasswordSignUp").val("");
+          $("#userPasswordRepeat").val("");
+          $("#userEmailSignUp").val("");         
 
         }
       }
@@ -268,20 +259,16 @@ $("#logInBtn").on("click", function(event){
             $(".userHeader").removeClass("hidden");
             $(".planContainer").removeClass("hidden");
             $(".userHeader").addClass("flex");
-
-            // $("#Log_In_Button").removeClass("bg-gray-500 hover:bg-gray-400");
-            // $("#Sign_Up_Button").removeClass("bg-green-500 hover:bg-green-400");    
-            // $("#Log_In_Button").addClass("bg-green-500 hover:bg-green-400");
-            // $("#Sign_Up_Button").addClass("bg-gray-500 hover:bg-gray-400");  
+ 
             $(".signUpForm").addClass("hidden");
             $(".logInForm").addClass("hidden");
 
-               console.log("before for");
+          // empty the login form
+          $("#userPasswordLogIn").val("");
+          $("#userEmailLogIn").val("");    
            
             for (var k=0;k<users[userIndex].userCities.length;k++){
               console.log("loading and creating user plans for the existing user");
-
-              console.log("the city name is ", users[userIndex].userCities[k].cityName)
               getWeather(users[userIndex].userCities[k].cityName);
             }
 
