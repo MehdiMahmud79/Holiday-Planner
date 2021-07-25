@@ -14,7 +14,7 @@ var cityDate;
 var cityPlan;
 var user = {};
 var userEmail;
-var index = 0;
+var index;
 
 var markers=[]; // city markers for the goole map
 var cityList=[];
@@ -388,7 +388,7 @@ function creatPlanList() {
         var wfull = $(`<div class="flex flex-row w-full"> `);
         var mainCont = $(`<div class="flex shadow-sm rounded-l p-3 bg-gray-300">`);
         var submittedPlan = $(`<div id="submittedPlan" class=" block" >`);
-        var mb2 = $(`<div id="${index}" class="  main-container flex  mb-2">`);
+        var mb2 = $(`<div id="${users[userIndex].userCities.length-1}" class="  main-container flex  mb-2">`);
 
         w40.append(
           `<h2 class="todayDate"><i class="fa fa-calendar m-2" aria-hidden="true"></i><span class="m-2">${cityDate} </span></h2>`
@@ -430,28 +430,22 @@ function creatPlanList() {
 }
 
 function handleRemoveItem(event) {
-        // convert button we pressed (`event.target`) to a jQuery DOM object
-        var btnClicked = $(event.target);
-        console.log(btnClicked, btnClicked.parent());
 
-        // get the parent `<li>` element from the button we pressed and remove it
+          var btnClicked = $(event.target);
 
         var k=parseInt(btnClicked.parent().parent().attr("id"));
         console.log("k",k)
 
-        for (var i=0;i<cityList.length;i++){
+        for (var i=0;i<users[userIndex].userCities.length;i++){
 
-          if(cityList[i]===k){
-            cityList.splice(i,1);
+          if(parseInt(users[userIndex].userCities[i].cityIndex)===k){
+            users[userIndex].userCities.splice(i,1);
           }
         }
-        console.log("cityList", cityList);
-
+        // remove the city plan from the page
         btnClicked.parent().parent().remove(); 
-        var usercities=userObj.userCities;
-        for (var j=0;j<usercities.length;j++){
-          
-        }
+        setPreviousUsers();
+        getPreviousUsers();
 }
 
 // a function to creat the city plans for a current user
@@ -485,10 +479,9 @@ function addPlan(event) {
           userPlans.cityName=cityName;
           userPlans.cityDate=cityDate;
           userPlans.cityPlan=cityPlan;
-          console.log("userIndex is", userIndex, users[userIndex].userCities);
+          userPlans.cityIndex=users[userIndex].userCities.length+1;
           
           users[userIndex].userCities.push(userPlans)
-          console.log("userIndex is", userIndex, users[userIndex].userCities);
 
           // users[userIndex].userCities.push(userObj.userCities);
 
@@ -497,8 +490,7 @@ function addPlan(event) {
 
           getWeather(cityName);
 
-          index++;
-          cityList.push(cityName);
 }
 
+//  submitting the plan and add it to the page and the local storage
 $("#planSubmit").on("submit", addPlan);
