@@ -3,7 +3,7 @@ let map;
 let service;
 let infowindow;
 
-function initMap(){
+function initMap(cityName,method){
   console.log("in init map")
     // Map options
     var options = {
@@ -15,25 +15,28 @@ function initMap(){
      map.setMapTypeId('roadmap');
 
         // Add marker
-     var markerObj={
+     if(method==1){
+      console.log("method", method)
+
+       var markerObj={
+      cityName:cityName,
       coords:{lat:weather.lat,lng:weather.lng}, // get this from the city name lan lon
       map:map,
       iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
       content:cityPlan
 
     }
-     markers.push(markerObj);
-     console.log("going to update markers" )
+    markers.push(markerObj);
+    } 
 
     updateMarkers()
   
 
 
   function updateMarkers(){
-    console.log("in update markers", markers.length )
 
         // Loop through markers
-    for(var i = 1;i < markers.length;i++){
+    for(var i = 0;i < markers.length;i++){
       // Add marker
       addMarker(markers[i]); 
       console.log(markers[i]);  
@@ -44,7 +47,6 @@ function initMap(){
     
 
 function addMarker(props){
-  console.log("in add markers")
   var marker = new google.maps.Marker({
         position:props.coords,
         map:map,

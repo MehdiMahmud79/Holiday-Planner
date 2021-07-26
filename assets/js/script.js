@@ -371,7 +371,7 @@ function getWeather(cityName) {
       creatPlanList();
       // findPlaces(-weather.lat, weather.lng );
       
-      initMap()
+      initMap(cityName,1)
       $("#GoogleMap").removeClass("hidden")
     })
 
@@ -440,11 +440,17 @@ function handleRemoveItem(event) {
         for (var i=0;i<users[userIndex].userCities.length;i++){
 
           if(parseInt(users[userIndex].userCities[i].cityIndex)===k){
+						var city_name=users[userIndex].userCities[i].cityName;
             users[userIndex].userCities.splice(i,1);
-						markers.splice(i,1);
           }
         }
-				
+				for(var i=0; i<markers.length; i++){
+					if(markers[i].cityName=city_name)	{
+						markers.splice(i,1);
+						console.log("trying to remove the city ", city_name);
+					}
+				}
+				initMap(city_name,2);
         // remove the city plan from the page
         btnClicked.parent().parent().remove(); 
         setPreviousUsers();
