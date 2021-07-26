@@ -441,8 +441,10 @@ function handleRemoveItem(event) {
 
           if(parseInt(users[userIndex].userCities[i].cityIndex)===k){
             users[userIndex].userCities.splice(i,1);
+						markers.splice(i,1);
           }
         }
+				
         // remove the city plan from the page
         btnClicked.parent().parent().remove(); 
         setPreviousUsers();
