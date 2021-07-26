@@ -96,9 +96,20 @@ function createModal(message){
 
 
 //  add eventlistner to the login and logout buttons
-$("#logOutBtn").on("click",login);
+$("#logOutBtn").on("click",logout);
 $("#menuLoginBtn").on("click",login);
 
+function logout(){
+  $(".addPlan").addClass("hidden");
+  $("#GoogleMap").addClass("hidden")
+  $(".LoginContainer").removeClass("hidden");
+  $(".planContainer").addClass("hidden");
+  $(".userHeader").addClass("hidden");
+    $(".planContainer").empty();
+
+
+    Sign_Up_Button()
+}
 function login(){
   $(".addPlan").addClass("hidden");
   $("#GoogleMap").addClass("hidden")
