@@ -88,7 +88,7 @@ function createModal(message){
         hide: {
           effect: "explode",
           duration: 100
-        }
+        },
         open: function () {
           var markup = message;
           $(this).html(markup);
