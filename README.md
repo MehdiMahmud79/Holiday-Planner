@@ -43,7 +43,7 @@ The following animation shows the web application's appearance and functionality
 
 
 ## Websites
-* [URL to the Weather dashboard](https://mehdimahmud79.github.io/Holiday-Planner/)
+* [URL to the HOLIDAY pLANNER](https://mehdimahmud79.github.io/Holiday-Planner/)
 
 * [The URL of the GitHub repository](https://github.com/MehdiMahmud79/Holiday-Planner)
 
