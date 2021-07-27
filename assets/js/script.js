@@ -81,6 +81,14 @@ function createModal(message){
         modalBox.dialog({
         modal: true,
         title: "Error!",
+        show: {
+          effect: "explode",
+          duration: 100
+        },
+        hide: {
+          effect: "explode",
+          duration: 100
+        }
         open: function () {
           var markup = message;
           $(this).html(markup);
