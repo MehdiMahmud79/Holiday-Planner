@@ -51,7 +51,7 @@ The following animation shows the web application's appearance and functionality
 
 
 ## Websites
-* [URL to the Holiday Planner](https://mehdimahmud79.github.io/Holiday-Planner/)
+* [Live Holiday Planner](https://mehdimahmud79.github.io/Holiday-Planner/)
 
 * [The URL of the GitHub repository](https://github.com/MehdiMahmud79/Holiday-Planner)
 
