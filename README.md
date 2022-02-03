@@ -1,6 +1,5 @@
 # Holiday-Planner
-This project is an application for a holiday planner which gives you the ability to pick a city and plan for a specific day. It gives you the weather of that city as well as the local attractions and restaurants.
-
+This project is an application for a holiday planner which gives you the ability to pick a city and plan for a specific day. It gives you the weather of that city.
 
 ```
 + This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery using Third-Party APIs.
